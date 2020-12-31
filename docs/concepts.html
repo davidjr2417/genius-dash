@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Genius Concepts</title>
+
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!-- Main CSS-->
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/main2.css">
+  <link rel="stylesheet" href="./css/collapsible.css">
+  <link rel="stylesheet" href="./css/notebook.css">
+  <link rel="stylesheet" href="./css/video_carousel.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
+  <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+  <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+
+
+</head>
+
+<body class="app sidebar-mini">
+
+  <!-- Navbar-->
+  <header class="app-header"><a class="app-header__logo" href="index.html">Vali</a>
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+      aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+      <li class="app-search">
+        <input class="app-search__input" type="search" placeholder="Search">
+        <button class="app-search__button"><i class="fa fa-search"></i></button>
+      </li>
+      <!--Notification Menu-->
+      <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i
+            class="fa fa-bell-o fa-lg"></i></a>
+      </li>
+      <!-- User Menu-->
+      <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i
+            class="fa fa-user fa-lg"></i></a>
+        <ul class="dropdown-menu settings-menu dropdown-menu-right">
+          <!-- <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li> -->
+          <li><a class="dropdown-item" id="authorize_button"><i class="fa fa-user fa-lg"></i> Log In</a></li>
+          <li><a class="dropdown-item" id="signout_button" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i>
+              Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </header>
+
+
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user text-center">
+      <img class="app-sidebar__user-avatar"
+        src="https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png" width="50"
+        height="50" alt="User Image">
+      <div>
+        <p class="app-sidebar__user-designation" name="genius-cohort">Loading...</p>
+        <p class="app-sidebar__user-name">
+          <span name="genius-fn"> Loading...</span>
+          <span name="genius-fn"></span>
+        </p>
+
+        <p class="app-sidebar__user-designation genius-cohort" name="genius-email">Loading...</p>
+        <p class="app-sidebar__user-designation"><a href="https://www.hiddengeniusproject.org/about/">Mission
+            Statement</a></p>
+        <p class="app-sidebar__user-designation">Business Git Hub Link <span
+            style="font-size:10px; float:right; line-height: 20px;"> Edit</span></p>
+
+      </div>
+    </div>
+    <ul class="app-menu">
+      <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Dashboard</span></a></li>
+
+
+      <li><a class="app-menu__item active" href="concepts.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Concepts</span></a></li>
+
+      <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Business Hours</span></a></li>
+      <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Accountability</span></a></li>
+      <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Attendance</span></a></li>
+
+    </ul>
+  </aside>
+
+
+  <main class="app-content">
+    <div class="app-title-outer ">
+      <div class="row app-title">
+
+        <div class="welcome-container">
+          <h1>
+            Welcome Back, <span name="genius-fn"></span>
+          </h1>
+          <p>Quick View Our Your Information</p>
+
+        </div>
+        <div>
+
+          <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class=" genius-main-data">  
+      <div class="row pie-outer-container">
+        <div class="col-12 pie-container">
+          <canvas id="PieChart1"></canvas>
+        </div>
+      </div>
+
+<style>
+        .pie-outer-container{
+          height:350px; 
+          margin-bottom:50px;
+        }
+      </style>
+
+      <div class="row" style="min-height:500px; margin-bottom:50px;">
+        <div class="col-12" style="min-height:200px; ">
+          <div class="slider" id="main-slider">
+            <!-- outermost container element -->
+            <div class="slider-wrapper">
+              <!-- innermost wrapper element -->
+              <div class="slide">
+                <iframe src="https://player.vimeo.com/video/109608341?title=0&amp;byline=0&amp;portrait=0" width="1024"
+                  height="626" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+              </div><!-- slides -->
+              <div class="slide">
+                <iframe src="https://player.vimeo.com/video/102570343?title=0&amp;byline=0&amp;portrait=0" width="1024"
+                  height="576" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+              </div>
+              <div class="slide">
+                <iframe src="https://player.vimeo.com/video/97620325?title=0&amp;byline=0&amp;portrait=0" width="1024"
+                  height="576" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="slider-nav">
+              <!-- "Previous" and "Next" actions -->
+              <button class="slider-previous">Previous</button>
+              <button class="slider-next">Next</button>
+            </div>
+          </div>
+
+
+
+
+
+
+
+        </div>
+        <!-- <div class="col-12 col-lg-6">
+                <h5>BJCP Style 26. Trappist Ale</h5>
+                <section class="accordion">
+                  <input type="checkbox" name="collapse" id="handle1" checked="checked">
+                  <h6 class="handle">
+                    <label for="handle1">26A. Trappist Single</label>
+                  </h6>
+                  <div class="content">
+                    <p><strong>Overall Impression:</strong> A pale, bitter, highly attenuated and well carbonated Trappist ale, showing a fruity-spicy Trappist yeast character, a spicy-floral hop profile, and a soft, supportive grainy-sweet malt palate.</p>
+                    <p><strong>History:</strong> While Trappist breweries have a tradition of brewing a lower-strength beer as a monk’s daily ration, the bitter, pale beer this style describes is a relatively modern invention reflecting current tastes. Westvleteren first brewed theirs in 1999, but replaced older lower-gravity products.</p>
+                  </div>
+                </section>
+                <section class="accordion">
+                  <input type="checkbox" name="collapse2" id="handle2">
+                  <h6 class="handle">
+                    <label for="handle2">26B. Belgian Dubbel</label>
+                  </h6>
+                  <div class="content">
+                    <p><strong>Overall Impression:</strong> A deep reddish-copper, moderately strong, malty, complex Trappist ale with rich malty flavors, dark or dried fruit esters, and light alcohol blended together in a malty presentation that still finishes fairly dry.</p>
+                    <p><strong>History:</strong> Originated at monasteries in the Middle Ages, and was revived in the mid-1800s after the Napoleonic era.</p>
+                  </div>
+                </section>
+                <section class="accordion">
+                  <input type="checkbox" name="collapse2" id="handle3">
+                  <h6 class="handle">
+                    <label for="handle3">26C. Belgian Tripel</label>
+                  </h6>
+                  <div class="content">
+                    <p><strong>Overall Impression:</strong> A pale, somewhat spicy, dry, strong Trappist ale with a pleasant rounded malt flavor and firm bitterness. Quite aromatic, with spicy, fruity, and light alcohol notes combining with the supportive clean malt character to produce a surprisingly drinkable beverage considering the high alcohol level.</p>
+                    <p><strong>History:</strong> Originally popularized by the Trappist monastery at Westmalle.</p>
+                  </div>
+                </section>
+                
+    </div> -->
+
+
+
+      </div>
+      <div class="row" style="min-height:500px">
+        <div class="col-12 col-lg-6">
+          <div class="paper">
+            <div class="paper-content">
+              <h4>
+                1. I Learned The Following About ____________...
+
+              </h4>
+
+
+              <textarea>Hello world !&#10;Here's a paaper textarea tag.</textarea>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="paper">
+            <div class="paper-content">
+              <h4>
+                <strong>
+                  2. I Will Apply __________ To My Personal Project By....
+                </strong>
+              </h4>
+
+              <textarea>Hello world !&#10;Here's a paaper textarea tag.</textarea>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+  <script>
+
+    //The reason this, and couple other of my canvas webapps, might be laggy is because the resolution scales up directly with the size of your display. This can be fixed by programmatically adjusting based on requested page resolution..
+
+    var demos = [
+
+      {
+        title: "",
+        background: "#E5E5E5",
+        dataset: {
+          "Variable": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Business Entities": { percentage: 16.66, color: "#00FF00", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Pitch Deck": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Data Collection": { percentage: 16.66, color: "#00FF00", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Polymorphism": { percentage: 16.66, color: "#00FF00", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Conditionals": { percentage: 16.66, color: "#00FF00", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." }
+        },
+        font: "Copperplate",
+        fullscreen: true,
+        circleRadius: 120,
+        pointerRadius: 230,
+        textRadius: 190,
+        pointerHeadRadii: 7,
+        spacing: 10 * 200 / 300
+      },
+
+      {
+        title: "Animals I Like",
+        background: "#DDDDDD",
+        dataset: { "koalas": { percentage: 100, color: "#007744", story: "Koalas are so cute!" } },
+        font: "	Papyrus",
+        fullscreen: true,
+        circleRadius: 300,
+        pointerRadius: 335,
+        textRadius: 450,
+        pointerHeadRadii: 10,
+        spacing: 10
+      },
+
+
+
+      {
+        title: "Things in my House",
+        background: "#FF3322",
+        dataset: { 'cars': { story: 'cars are sooper fun. They can drive on land but they don\'t work in aquadic conditions. :\'(', color: '#221100', percentage: 35 }, 'giraffes': { story: 'Giraffes are sooooo cute, sometimes they fight each other with their little antenna thingies, but usually they just eat tree leaves.', color: '#0000FF', percentage: 7 }, 'ladybugs': { story: 'lady bugs aren\'t necessarily ladies.', color: '#6600EE', percentage: 55.9 }, 'onion rings': { story: 'Onions rings are sooo tasty, but they are soooo much better when you find one in your order of regular fries.', color: '#FFFF00', percentage: 2.1 } },
+        font: "Copperplate",
+        fullscreen: true,
+        circleRadius: 200,
+        pointerRadius: 230,
+        textRadius: 380,
+        pointerHeadRadii: 7,
+        spacing: 10 * 200 / 300
+      },
+
+    ];
+
+
+    /*var titles = ['cars', 'giraffes', 'ladybugs', 'onion rings'];
+     var stories = ['cars are sooper fun. They can drive on land but they don\'t work in aquadic conditions. :\'(', 'Giraffes are sooooo cute, sometimes they fight each other with their little antenna thingies, but usually they just eat tree leaves.', 'lady bugs aren\'t necessarily ladies.', 'Onions rings are sooo tasty, but they are soooo much better when you find one in your order of regular fries.']
+     var colors = ["#FF0000", "#0000FF", "#FF00FF", "#FFFF00"];
+     var ratios = [.35,.07,.559,.021];
+     var spacing = 10;
+     var radius = 300;
+     var textRadius = 450;
+     var pointerRadius = 335;
+     var pointerHeadRadii = 10;*/
+
+    var settings = demos[0]
+
+
+    var stage;
+    var canvas;
+    var slices;
+    var lastCenter;
+
+    var infoPanel;
+    var transitionArc;
+    var bg;
+    var title;
+    var text;
+    var bar;
+
+    var demoIndex = 0;
+
+    // resize the canvas to fill browser window dynamically
+    function resizeCanvas() {
+      if (settings.fullscreen) {
+        console.log(document.getElementsByClassName('pie-container')[0].offsetWidth);
+        canvas.width = document.getElementsByClassName('pie-container')[0].offsetWidth - 25;//window.innerWidth;
+        canvas.height = document.getElementsByClassName('pie-container')[0].offsetHeight;//window.innerHeight;
+      }
+      for (var i = 0; i < stage.children.length; i++) {
+        stage.children[i].x += canvas.width / 2 - lastCenter[0];
+        stage.children[i].y += canvas.height / 2 - lastCenter[1];
+      }
+      lastCenter = [canvas.width / 2, canvas.height / 2];
+    }
+
+    function drawArc(graphics, color, center, radius, s, e) {
+      var stroke = graphics
+        .beginFill(color).moveTo(center[0], center[1])
+        .arc(0, 0, radius, s, e).command;
+      return stroke;
+    }
+
+    function distance(a, b) {
+      return Math.pow(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2), .5);
+    }
+
+    function nextDemo() {
+      demoIndex = (demoIndex + 1) % demos.length;
+      settings = demos[demoIndex];
+      for (var i in slices.children) {
+        slices.children[i].off('mouseover', slices.children[i].mo);
+        slices.children[i].off('mouseout', slices.children[i].ml);
+        slices.children[i].off('click', slices.children[i].mc);
+      }
+      init();
+      //console.debug("hi")
+    }
+
+    function init() {
+
+      stage = new createjs.Stage("PieChart1");
+      canvas = document.getElementById('PieChart1');
+      window.addEventListener('resize', resizeCanvas, false);
+
+      canvas.style.background = settings.background;
+
+      createjs.Ticker.setFPS(60);
+
+      stage.enableMouseOver();
+
+      createjs.Ticker.addEventListener("tick", stage);
+      createjs.Ticker.addEventListener("tick", update);
+      lastCenter = [canvas.width / 2, canvas.height / 2];
+      resizeCanvas();
+
+      slices = new createjs.Container();
+      infoPanel = new createjs.Container();
+
+      var title = new createjs.Text(settings.title, "72px " + settings.font, colourIsLight(settings.background) ? "#000" : "#FFF");
+      title.x = canvas.width / 4;
+      title.y = 100;
+      title.textAlign = "center";
+      stage.addChild(title)
+      stage.addChild(slices);
+
+      //stage.update();
+      /*var titles = ['cars', 'giraffes', 'ladybugs', 'onion rings'];
+      var stories = ['cars are sooper fun. They can drive on land but they don\'t work in aquadic conditions. :\'(', 'Giraffes are sooooo cute, sometimes they fight each other with their little antenna thingies, but usually they just eat tree leaves.', 'lady bugs aren\'t necessarily ladies.', 'Onions rings are sooo tasty, but they are soooo much better when you find one in your order of regular fries.']
+      var colors = ["#FF0000", "#0000FF", "#FF00FF", "#FFFF00"];
+      var ratios = [.35,.07,.559,.021];
+      var spacing = 10;
+      var radius = 300;
+      var textRadius = 450;
+      var pointerRadius = 335;
+      var pointerHeadRadii = 10;*/
+
+      //
+      //colourIsLight(settings.background) ? "#000" : "#FFF"
+
+      var currentAngle = 0;
+      for (var entry in settings.dataset) {
+        var data = settings.dataset[entry];
+        if (data.percentage == 100)
+          settings.spacing = 0;
+        var arc = new createjs.Shape();
+        arc.x = canvas.width / 2;
+        arc.y = canvas.height / 2;
+        var cAngle = currentAngle + Math.PI * data.percentage / 100;
+        var center = [settings.spacing * (Math.cos(cAngle)), settings.spacing * Math.sin(cAngle)]
+        var label = new createjs.Text(entry, "20px " + settings.font, colourIsLight(settings.background) ? "#000" : "#FFF");
+        label.x = arc.x + settings.textRadius * Math.cos(cAngle);
+        label.y = arc.y + settings.textRadius * (Math.abs(Math.sin(cAngle)) > .7 ? (Math.sin(cAngle) < 0 ? Math.sin(cAngle) + .2 : Math.sin(cAngle) - .2) : Math.sin(cAngle));
+
+        label.textAlign = "center";
+        var line = new createjs.Shape();
+        // line.graphics.beginStroke(colourIsLight(settings.background) ? "#000" : "#FFF").setStrokeStyle(2).moveTo(label.x-label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight()).lineTo(label.x+label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight())
+        //branch from right side
+
+        //         if (distance([label.x+label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight()], [arc.x,arc.y])>distance([label.x-label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight()], [arc.x,arc.y]))
+        //            line.graphics.moveTo(label.x-label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight()) //branch from left side
+        //         line.graphics.lineTo(arc.x+settings.pointerRadius*Math.cos(cAngle), arc.y+settings.pointerRadius*Math.sin(cAngle));
+        // line.graphics.moveTo(arc.x+settings.pointerRadius*Math.cos(cAngle)+settings.pointerHeadRadii,arc.y+settings.pointerRadius*Math.sin(cAngle)).beginFill(settings.background).drawCircle(arc.x+settings.pointerRadius*Math.cos(cAngle),arc.y+settings.pointerRadius*Math.sin(cAngle),settings.pointerHeadRadii)
+        //         stage.addChild(line);
+        // label.x-label.getMeasuredWidth()/2;
+        stage.addChild(label);
+        //The following are properties added to the Shape objects so it "remembers" important details about its associated graphics object, and details about the Slice data
+
+        arc.color = data.color;
+        arc.startAngle = currentAngle + settings.spacing / settings.circleRadius;
+        arc.endAngle = currentAngle + 2 * Math.PI * data.percentage / 100;
+        arc.center = center;
+        arc.title = entry;
+        arc.story = data.story;
+
+        var stroke = drawArc(arc.graphics, data.color, center, settings.circleRadius, 0, 0);
+        createjs.Tween.get(stroke)
+          .to({ startAngle: currentAngle + settings.spacing / settings.circleRadius, endAngle: currentAngle + 2 * Math.PI * data.percentage / 100 }, 1000, createjs.Ease.sineInOut);
+        currentAngle = currentAngle + 2 * Math.PI * data.percentage / 100;
+        arc.saveEvents = function (n, a, b, c) { n.mo = a; n.ml = b; n.mc = c; }
+        createjs.Tween.get(arc).wait(1000).call(
+          function (event) {
+            event.target.saveEvents(event.target, event.target.on("mouseover", sliceMouseOver), event.target.on("mouseout", sliceMouseOut), event.target.on("click", sliceMouseClick));
+          });
+
+        //console.log(arc);
+        slices.addChild(arc);
+      }
+      var label2 = new createjs.Text("18%", "50px " + settings.font, colourIsLight(settings.background) ? "#000" : "#FFF");
+      label2.x = arc.x;
+      label2.y = arc.y - 25;
+
+      label2.textAlign = "center";
+      stage.addChild(label2);
+
+      //stage.on("stagemousemove", mouseOver);
+
+      stage.update();
+      /*createjs.Tween.get(circle, { loop: true })
+          .to({ x: 400 }, 1000, createjs.Ease.getPowInOut(4))
+          .to({ alpha: 0, y: 125 }, 500, createjs.Ease.getPowInOut(2))
+          .to({ alpha: 0, y: 75 }, 100)
+          .to({ alpha: 1, y: 100 }, 500, createjs.Ease.getPowInOut(2))
+          .to({ x: 100 }, 800, createjs.Ease.getPowInOut(2));*/
+    }
+    init();
+    //use globalized radius below (replace 300)
+
+    function sliceMouseOver(event) {
+      event.target.filters = [
+        new createjs.ColorFilter(1, 1, 1, 1, 100, 100, 100, 0)
+      ];
+      event.target.cache(-300, -300, 600, 600);
+    }
+
+    function sliceMouseOut(event) {
+      event.target.filters = [
+        new createjs.ColorFilter(1, 1, 1, 1, 0, 0, 0, 0)
+      ];
+      event.target.cache(-300, -300, 600, 600);
+    }
+
+    function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
+    function colourIsLight(h) {
+
+      // Counting the perceptive luminance
+      // human eye favors green color...
+      var rgb = hexToRgb(h);
+      var a = 1 - (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
+      return (a < 0.5);
+    }
+
+    function sliceMouseClick(event) {
+      if (!stage.contains(infoPanel)) {
+        //stage.setChildIndex( event.target, stage.getNumChildren()-1);
+        infoPanel.children = [];
+        bg = new createjs.Shape();
+        bg.graphics.beginFill(event.target.color).drawRect(0, 0, canvas.width, canvas.height);
+        infoPanel.addChild(bg);
+        transitionArc = new createjs.Shape();
+        transitionArc.x = canvas.width / 2;
+        transitionArc.y = canvas.height / 2;
+        infoPanel.parentSlice = event.target;
+        var stroke = drawArc(transitionArc.graphics, "#000", [0, 0], settings.circleRadius, event.target.startAngle, event.target.endAngle);
+        createjs.Tween.get(stroke)
+          .to({ startAngle: 0, endAngle: 2 * Math.PI, radius: Math.max(canvas.width, canvas.height) * Math.sqrt(2) }, 1000, createjs.Ease.sineInOut);
+        var backButton = new createjs.Shape().set({ x: 60, y: 60 });
+        backButton.graphics.beginStroke(colourIsLight(event.target.color) ? "#000" : "#FFF").setStrokeStyle(6, 'round').drawCircle(0, 0, 40).moveTo(-15, 0).lineTo(5, 20).moveTo(-15, 0).lineTo(5, -20);
+
+        update();
+
+
+        var hit = new createjs.Shape();
+        hit.graphics.beginFill("#000").drawCircle(0, 0, 40);
+        backButton.hitArea = hit;
+        backButton.color = colourIsLight(event.target.color) ? "#000" : "#FFF";
+        backButton.on("mouseover", BBMouseOver);
+        backButton.on("mouseout", BBMouseOut);
+        backButton.on("click", BBMouseClick);
+        infoPanel.addChild(backButton);
+        title = new createjs.Text(event.target.title, "36px " + settings.font, backButton.color);
+        title.textAlign = "center";
+        title.y = 0;
+        title.x = canvas.width / 2;
+        infoPanel.addChild(title);
+        text = new createjs.Text(event.target.story, "36px " + settings.font, backButton.color);
+        text.textAlign = "center";
+        text.y = 150;
+        text.x = canvas.width / 2;
+        text.lineWidth = canvas.width - 50;
+        infoPanel.addChild(text);
+        bar = new createjs.Shape();
+        bar.graphics.beginStroke(colourIsLight(event.target.color) ? "#000" : "#FFF").setStrokeStyle(3, 'round').moveTo(-canvas.width / 2 + 150, 0).lineTo(canvas.width / 2 - 150, 0)
+        bar.x = canvas.width / 2;
+        bar.y = 125;
+        infoPanel.addChild(bar);
+        stage.addChild(infoPanel);
+      }
+    }
+
+    function BBMouseOver(event) {
+      event.target.filters = [
+        new createjs.ColorFilter(1, 1, 1, 1, event.target.color == "#000" ? 100 : -100, event.target.color == "#000" ? 100 : -100, event.target.color == "#000" ? 100 : -100, 0)
+      ];
+      event.target.cache(-45, -45, 90, 90);
+    }
+
+    function BBMouseOut(event) {
+      event.target.filters = [
+        new createjs.ColorFilter(1, 1, 1, 1, 0, 0, 0, 0)
+      ];
+      event.target.cache(-45, -45, 90, 90);
+    }
+
+    function BBMouseClick(event) {
+      //stage.removeChild(infoPanel);
+      transitionArc = new createjs.Shape();
+      transitionArc.x = canvas.width / 2;
+      transitionArc.y = canvas.height / 2;
+      //stage.addChild(transitionArc);
+      var stroke = drawArc(transitionArc.graphics, event.target.parent.parentSlice.color, event.target.parent.parentSlice.center, Math.max(canvas.width, canvas.height) * Math.sqrt(2), 0, 2 * Math.PI);
+
+      //var stroke = drawArc(arc.graphics, event.target.color, [0,0], 300, event.target.startAngle, event.target.endAngle);
+      createjs.Tween.get(stroke)
+        .to({ startAngle: event.target.parent.parentSlice.startAngle, endAngle: event.target.parent.parentSlice.endAngle, radius: settings.circleRadius }, 1000, createjs.Ease.sineInOut).call(function () { stage.removeChild(infoPanel); });
+    }
+
+    function update() {
+      if (transitionArc && infoPanel) {
+        transitionArc.x = canvas.width / 2;
+        transitionArc.y = canvas.height / 2;
+        bg.graphics.drawRect(0, 0, canvas.width, canvas.height);
+
+        if (title && text && bar) {
+          title.y = 30;
+          title.x = canvas.width / 2;
+          text.y = 150;
+          text.x = canvas.width / 2;
+          bar.x = canvas.width / 2;
+          bar.y = 125;
+        }
+
+        infoPanel.x = infoPanel.y = 0;
+        transitionArc.cache(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+        transitionArc.updateCache();
+        maskFilter = new createjs.AlphaMaskFilter(transitionArc.cacheCanvas);
+        infoPanel.filters = [maskFilter];
+        infoPanel.cache(0, 0, canvas.width, canvas.height);
+        infoPanel.updateCache(0, 0, canvas.width, canvas.height);
+      }
+      /*for (var i=0; i<slices.children.length; i++)
+        {
+          slices.children[i].x = canvas.width/2;
+          slices.children[i].y = canvas.height/2;
+        }*/
+    }
+
+
+  </script>
+  <script>
+    // carouse
+
+
+    (function () {
+
+      function Slideshow(element) {
+        this.el = document.querySelector(element);
+        this.init();
+      }
+
+      Slideshow.prototype = {
+        init: function () {
+          this.wrapper = this.el.querySelector(".slider-wrapper");
+          this.slides = this.el.querySelectorAll(".slide");
+          this.previous = this.el.querySelector(".slider-previous");
+          this.next = this.el.querySelector(".slider-next");
+          this.index = 0;
+          this.total = this.slides.length;
+
+          this.actions();
+        },
+        _slideTo: function (slide) {
+          var currentSlide = this.slides[slide];
+          currentSlide.style.opacity = 1;
+
+          for (var i = 0; i < this.slides.length; i++) {
+            var slide = this.slides[i];
+            if (slide !== currentSlide) {
+              slide.style.opacity = 0;
+            }
+          }
+        },
+        actions: function () {
+          var self = this;
+
+
+
+          self.next.addEventListener("click", function () {
+            self.index++;
+            self.previous.style.display = "block";
+
+            if (self.index == self.total - 1) {
+              self.index = self.total - 1;
+              self.next.style.display = "none";
+            }
+
+            self._slideTo(self.index);
+
+          }, false);
+
+          self.previous.addEventListener("click", function () {
+            self.index--;
+            self.next.style.display = "block";
+
+            if (self.index == 0) {
+              self.index = 0;
+              self.previous.style.display = "none";
+            }
+
+            self._slideTo(self.index);
+
+          }, false);
+        }
+
+
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+
+        var slider = new Slideshow("#main-slider");
+
+      });
+
+
+    })();
+
+
+
+  </script>
+</body>
+
+</html>

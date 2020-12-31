@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title> Genius Dashbboard</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="license" href="https://www.opensource.org/licenses/mit-license/">
+
+
+  <!-- Main CSS-->
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/main2.css">
+  <link rel="stylesheet" href="./css/calendar.css">
+  <link rel="stylesheet" href="./css/todo.css">
+  <link rel="stylesheet" href="./css/attend.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
+  <script src="./js/g-sheets-api.js"></script>
+  <script src="./js/data.js"></script>
+  <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
+  <script src="https://cdn.rawgit.com/bm-w/d3/master/d3.js"></script>
+</head>
+
+<body class="app sidebar-mini">
+
+  <!-- Navbar-->
+  <header class="app-header"><a class="app-header__logo" href="index.html">Vali</a>
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+      aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+      <li class="app-search">
+        <input class="app-search__input" type="search" placeholder="Search">
+        <button class="app-search__button"><i class="fa fa-search"></i></button>
+      </li>
+      <!--Notification Menu-->
+      <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i
+            class="fa fa-bell-o fa-lg"></i></a>
+        <!-- <ul class="app-notification dropdown-menu dropdown-menu-right">
+          <li class="app-notification__title">You have 4 new notifications.</li>
+          <div class="app-notification__content">
+            <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                    class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i
+                      class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                <div>
+                  <p class="app-notification__message">Lisa sent you a mail</p>
+                  <p class="app-notification__meta">2 min ago</p>
+                </div>
+              </a></li>
+            <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                    class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i
+                      class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                <div>
+                  <p class="app-notification__message">Mail server not working</p>
+                  <p class="app-notification__meta">5 min ago</p>
+                </div>
+              </a></li>
+            <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                    class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i
+                      class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                <div>
+                  <p class="app-notification__message">Transaction complete</p>
+                  <p class="app-notification__meta">2 days ago</p>
+                </div>
+              </a></li>
+            <div class="app-notification__content">
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                      class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i
+                        class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">Lisa sent you a mail</p>
+                    <p class="app-notification__meta">2 min ago</p>
+                  </div>
+                </a></li>
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                      class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i
+                        class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">Mail server not working</p>
+                    <p class="app-notification__meta">5 min ago</p>
+                  </div>
+                </a></li>
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                      class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i
+                        class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">Transaction complete</p>
+                    <p class="app-notification__meta">2 days ago</p>
+                  </div>
+                </a></li>
+            </div>
+          </div>
+          <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+        </ul> -->
+      </li>
+      <!-- User Menu-->
+      <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i
+            class="fa fa-user fa-lg"></i></a>
+        <ul class="dropdown-menu settings-menu dropdown-menu-right">
+          <!-- <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li> -->
+          <li><a class="dropdown-item" id="authorize_button"><i class="fa fa-user fa-lg"></i> Log In</a></li>
+          <li><a class="dropdown-item" id="signout_button" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i>
+              Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </header>
+
+
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user text-center">
+      <img class="app-sidebar__user-avatar"
+        src="https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png" width="50"
+        height="50" alt="User Image">
+      <div>
+        <p class="app-sidebar__user-designation" name="genius-cohort">Loading...</p>
+        <p class="app-sidebar__user-name">
+          <span name="genius-fn"> Loading...</span>
+          <span name="genius-fn"></span>
+        </p>
+
+        <p class="app-sidebar__user-designation genius-cohort" name="genius-email">Loading...</p>
+        <p class="app-sidebar__user-designation"><a href="https://www.hiddengeniusproject.org/about/">Mission
+            Statement</a></p>
+        <p class="app-sidebar__user-designation">Business Git Hub Link <span
+            style="font-size:10px; float:right; line-height: 20px;"> Edit</span></p>
+
+      </div>
+    </div>
+    <ul class="app-menu">
+      <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Dashboard</span></a></li>
+
+
+      <li><a class="app-menu__item active" href="concepts.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Concepts</span></a></li>
+
+      <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Business Hours</span></a></li>
+      <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Accountability</span></a></li>
+      <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i>
+          <span class="app-menu__label">Attendance</span></a></li>
+
+    </ul>
+  </aside>
+  <style>
+
+  </style>
+
+  <main class="app-content">
+    <div class="app-title-outer ">
+      <div class="row app-title">
+        
+        <div class="welcome-container">
+          <h1>
+            Welcome Back, <span name="genius-fn"></span>
+          </h1>
+          <p>Quick View Our Your Information</p>
+
+        </div>
+        <div>
+
+          <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="row justify-content-center genius-attend-form-container ">
+
+        <form action="" class="genius-attend-form col-12 col-lg-6 ">
+
+          <div class="genius-input-container row">
+            <div class="col-12 col-md-8">
+              <input type="text" name="topic-day" class="genius-topic-input" />
+              <label for="">Topic Of Day</label>
+            </div>
+            <div class="col-12 col-md-4">
+              <span class="fake-link" data-toggle="modal" data-target="#attendModal" class="genius-attend-notes">
+                Notes</span>
+            </div>
+
+
+          </div>
+          <div class=" col-12 col-md-8">
+            <div class=" row justify-content-center">
+              <div class="col-12 col-md-6">
+                <a onclick="imHereSubmit()" id="genius-attend-btn" class="trigger-btn" data-toggle="modal">I'm
+                  Here!!!</a>
+                <!-- <a href="#myModal" id="genius-attend-btn" class="trigger-btn" data-toggle="modal">I'm Here!!!</a> -->
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="attendModal" tabindex="-1" role="dialog" aria-labelledby="attendModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="attendModalLabel">Topic Of Day & Notes</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="genius-attend-modal row justify-content-center">
+
+                <form action="" class="genius-attend-form col-12 ">
+
+
+                  <div class="col-12 genius-input-container">
+                    <input type="text" name="topic-day" class="genius-topic-input" />
+                    <label for="">Topic Of Day</label>
+
+                  </div>
+                  <div class="col-12 genius-input-container">
+                    <textarea class="genius-topic-notes"></textarea>
+                    <label for="">Notes</label>
+                  </div>
+
+
+
+
+
+                </form>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <a href="#myModal" id="genius-attend-btn" class="trigger-btn btn btn-primary" data-toggle="modal">I'm
+                Here!!!</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="row genius-main-data genius-tasks">
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+          <div class="info">
+            <h4>Attendance %</h4>
+            <p><b name="genius-ttl-hrs-perc">Loading...</b></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small info coloured-icon"><i title="s" class="icon fa fa-thumbs-o-up fa-3x"
+            name="genius-perfect-attend-color"></i>
+          <div class="info">
+            <h4 name="genius-perfect-attend">Loading...</h4>
+            <p><b>
+                $<span name="genius-perfect-attend-amt">
+                  Loading...
+                </span>
+
+              </b></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
+          <div class="info">
+            <h4>Projects</h4>
+            <p><b name="genius-ttl-projects">Loading...</b> <span style="font-size:10px; float:right; line-height: 20px;"> Add Project</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small coloured-icon danger money"><i class="icon fa fa-dollar-sign fa-3x"></i>
+          <div class="info">
+            <h4>Stipend</h4>
+            <p><b>
+                $<span name="genius-ttl-stipend">
+                  Loading...
+                </span>
+
+              </b></p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+    <div class=" genius-main-data">
+      <div class="row" class="max-height:100%;">
+        <!-- <div class="todo-app" id="todo-app">
+            <form class="form" v-on:submit="addTodo">
+              <input class="input form__input" v-model="inputVal"/>
+              <button class="todo-btn form__submit-btn" type="submit">Add</button>
+            </form>
+            <transition-group tag="ol" name="list" class="todo-list">
+              <li
+                class="todo-list__item"
+                v-bind:class="{ complete: todo.complete }"
+                v-bind:key="index"
+                v-for="(todo, index) in filteredTodos">
+                <button
+                  class="todo-list__item-content"
+                  v-on:click="toggleTodo(todo)">
+                  {{ todo.text }}
+                </button>
+                <button
+                  class="todo-btn todo-list__item-remove"
+                  v-on:click="deleteTodo(index)">
+                  <i class="fa" v-bind:class="[todo.complete ? 'fa-check' : 'fa-times']"></i>
+                </button>
+              </li>
+            </transition-group>
+            <div class="filters">
+              <button 
+                class="todo-btn filters__btn filters__btn--all" 
+                v-on:click="filterTodos('all')">
+                All
+              </button>
+              <button 
+                class="todo-btn filters__btn filters__btn--complete" 
+                v-on:click="filterTodos('complete')">
+                Complete
+              </button>
+              <button 
+                class="todo-btn filters__btn filters__btn--incomplete" 
+                v-on:click="filterTodos('incomplete')">
+                Incomplete
+              </button>
+            </div>
+          </div> -->
+
+        <div class="col-12 col-lg-7 col-xl-5" style="height:350px; margin-bottom:50px;">
+          <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+
+          <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+
+          <div class="col-12 pie-container" style="height: 100%;">
+            <canvas id="PieChart1"></canvas>
+          </div>
+
+
+        </div>
+        <div class="col-12 col-lg-5 col-xl-3">
+
+          <div class="genius-levels-tracker" style="text-align:center">
+
+          </div>
+
+          <style>
+            .icon {
+              font-family: fontawesome;
+              font-weight: bold;
+              font-size: 30px;
+
+            }
+
+            .goal,
+            .completed {
+              font-family: 'Roboto', 'Myriad Set Pro', 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+              fill: white;
+              text-anchor: middle;
+            }
+
+            .goal {
+              font-size: 22px;
+
+
+            }
+
+            .completed {
+              font-size: 40px;
+            }
+          </style>
+          <script>
+            //based on https://bl.ocks.org/mbostock/1096355
+            //apple design:https://images.apple.com/watch/features/images/fitness_large.jpg
+            "use strict";
+
+            (function () {
+              var gap = 2;
+
+
+
+              var ranDataset2 = function () {
+                var ran = Math.random();
+
+                return [
+                  { index: 0, name: 'move', icon: "\uF105", percentage: 10 }
+                ];
+
+              };
+              var colors = ["#e90b3a", "#a0ff03", "#1ad5de"];
+              var width = 300,
+                height = 300,
+                τ = 2 * Math.PI;
+
+              function build(dataset, singleArcView) {
+
+                var arc = d3.svg.arc()
+                  .startAngle(0)
+                  .endAngle(function (d) {
+                    return d.percentage / 100 * τ;
+                  })
+                  .innerRadius(function (d) {
+                    return 85 - d.index * (20 + gap)
+                  })
+                  .outerRadius(function (d) {
+                    return 110 - d.index * (20 + gap)
+                  })
+                  .cornerRadius(10);//modified d3 api only
+
+                var background = d3.svg.arc()
+                  .startAngle(0)
+                  .endAngle(τ)
+                  .innerRadius(function (d, i) {
+                    return 85 - d.index * (20 + gap)
+                  })
+                  .outerRadius(function (d, i) {
+                    return 110 - d.index * (20 + gap)
+                  });
+
+                var svg = d3.select(".genius-levels-tracker").append("svg")
+                  .attr("width", width)
+                  .attr("height", height)
+                  .append("g")
+                  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+                //add linear gradient, notice apple uses gradient alone the arc..
+                //meh, close enough...
+
+
+                var gradient = svg.append("svg:defs")
+                  .append("svg:linearGradient")
+                  .attr("id", "gradient")
+                  .attr("x1", "0%")
+                  .attr("y1", "100%")
+                  .attr("x2", "50%")
+                  .attr("y2", "0%")
+                  .attr("spreadMethod", "pad");
+
+                gradient.append("svg:stop")
+                  .attr("offset", "0%")
+                  .attr("stop-color", "#fe08b5")
+                  .attr("stop-opacity", 1);
+
+                gradient.append("svg:stop")
+                  .attr("offset", "100%")
+                  .attr("stop-color", "#ff1410")
+                  .attr("stop-opacity", 1);
+
+
+                //add some shadows
+                var defs = svg.append("defs");
+
+                var filter = defs.append("filter")
+                  .attr("id", "dropshadow")
+
+                filter.append("feGaussianBlur")
+                  .attr("in", "SourceAlpha")
+                  .attr("stdDeviation", 4)
+                  .attr("result", "blur");
+                filter.append("feOffset")
+                  .attr("in", "blur")
+                  .attr("dx", 1)
+                  .attr("dy", 1)
+                  .attr("result", "offsetBlur");
+
+                var feMerge = filter.append("feMerge");
+
+                feMerge.append("feMergeNode")
+                  .attr("in", "offsetBlur");
+                feMerge.append("feMergeNode")
+                  .attr("in", "SourceGraphic");
+
+                var field = svg.selectAll("g")
+                  .data(dataset)
+                  .enter().append("g");
+
+                field.append("path").attr("class", "progress").attr("filter", "url(#dropshadow)");
+
+                field.append("path").attr("class", "bg")
+                  .style("fill", function (d) {
+                    return colors[d.index];
+                  })
+                  .style("opacity", 0.2)
+                  .attr("d", background);
+
+                field.append("text").attr('class', 'icon');
+
+
+                if (singleArcView) {
+
+                  field.append("text").attr('class', 'goal').text("OF SSLevel").attr("transform", "translate(0,30)");
+                  field.append("text").attr('class', 'goal').text("Hours").attr("transform", "translate(0,60)");
+                  field.append("text").attr('class', 'completed').attr("transform", "translate(0,-10)");
+                  field.append("text").attr('class', 'goal').text("Level: 1").attr("transform", "translate(0,135)");
+                }
+
+                d3.transition().duration(1750).each(update);
+
+                function update() {
+                  field = field
+                    .each(function (d) {
+                      this._value = d.percentage;
+                    })
+                    .data(dataset)
+                    .each(function (d) {
+                      d.previousValue = this._value;
+                    });
+
+                  field.select("path.progress").transition().duration(1750).delay(function (d, i) {
+                    return i * 200
+                  })
+                    .ease("elastic")
+                    .attrTween("d", arcTween)
+                    .style("fill", function (d) {
+                      if (d.index === 0) {
+                        return "url(#gradient)"
+                      }
+                      return colors[d.index];
+                    });
+
+                  field.select("text.icon").text(function (d) {
+                    return d.icon;
+                  }).attr("transform", function (d) {
+                    return "translate(10," + -(150 - d.index * (40 + gap)) + ")"
+
+                  });
+
+                  field.select("text.completed").text(function (d) {
+                    return 3;
+                  });
+
+                  setTimeout(update, 2000);
+
+                }
+
+                function arcTween(d) {
+                  var i = d3.interpolateNumber(d.previousValue, d.percentage);
+                  return function (t) {
+                    d.percentage = i(t);
+                    return arc(d);
+                  };
+                }
+
+
+              }
+
+
+
+              build(ranDataset2, true);
+
+
+            })()
+
+
+          </script>
+        </div>
+
+
+
+
+
+        <div class="col-12  col-xl-4">
+          <main id="calendar">
+            <header id="header" class="header">
+              <div class="header__arrow arrow--left">
+                <div class="arrow__circle">
+                  <div class="arrow__arrow">
+                    <div class="arrow__pipe"></div>
+                    <div class="arrow__triangle"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="header__main-date">
+                <div class="main-date__container"><span class="main-date__container__day"></span>
+                  <div class="day__month__wrapper"><span class="main-date__container__month"></span><span
+                      class="main-date__container__year"></span></div>
+                </div>
+              </div>
+              <div class="header__arrow arrow--right">
+                <div class="arrow__circle">
+                  <div class="arrow__arrow">
+                    <div class="arrow__pipe"></div>
+                    <div class="arrow__triangle"></div>
+                  </div>
+                </div>
+              </div>
+            </header>
+            <section id="days" class="days"></section>
+            <section id="daysgrid" class="daysgrid"></section>
+            <script type="text/x-handlebars-template" id="days_template">
+    {{#each days}}
+    <div class="days__day"><span>{{this}}</span></div>
+    {{/each}}
+  </script>
+
+            <script type="text/x-handlebars-template" id="cal">
+    {{#each days}}
+      {{#unless this.first}}
+        {{#if this.newWeek}}
+        
+        {{/if}}
+      {{/unless}}
+      {{#if this.newWeek}}
+      <div class="daysgrid__week">
+      {{/if}}
+      {{#if this.today}}
+          <div class="daysgrid__day daysgrid__day--today" data-date="{{this.date}}">
+      {{else}}
+          <div class="daysgrid__day " data-date="{{this.date}}">
+      {{/if}}
+          {{#if this.has_tasks}}
+            <div class="day__status day__status--undone"></div>
+          {{else if this.done}}
+            <div class="day__status day__status--done"></div>
+          {{else}}
+            <div class="day__status"></div>
+          {{/if}}
+            <div class="day__number">{{this.number}}</div>
+        </div>
+    {{/each}}
+  </script>
+
+            <script type="text/x-handlebars-template" id="tasks">
+    <div class="daysgrid__tasks" data-tasksfor="{{this.date}}">
+      <ul class="tasks">
+        {{#each tasks}}
+        <li class="tasks__task" data-taskid="{{this.id}}">
+          {{#if this.done}}
+            <input type="checkbox" id="{{this.id}}" checked="true"/>
+          {{else}}
+            <input type="checkbox" id="{{this.id}}" />
+          {{/if}}
+          <label for="{{this.id}}">{{this.title}}</label>
+          <button class="btn"><i class="cross"></i></button>
+        </li>
+        {{/each}}
+      </ul>
+      <textarea type="text" id="task_input" placeholder="Add task" name="task"></textarea>
+    </div>
+  </script>
+
+            <script type="text/x-handlebars-template" id="task">
+    <li class="tasks__task">
+      <input type="checkbox" id="{{this.id}}" />
+      <label for="{{this.id}}">{{this.title}}</label>
+      <button class="btn"><i class="cross"></i></button>
+    </li>
+  </script>
+          </main>
+
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </main>
+
+  <!--Add buttons to initiate auth sequence and sign out-->
+
+
+  <pre id="content" style="white-space: pre-wrap;"></pre>
+
+  <script type="text/javascript">
+
+
+
+    function formatDate(date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+      sec = d.getSeconds();
+      min = d.getMinutes();
+      hour = d.getHours();
+
+      if (month.length < 2)
+        month = '0' + month;
+      if (day.length < 2)
+        day = '0' + day;
+      var arr1 = [year, month, day].join('-');
+      var arr2 = [hour, min, sec].join(':');
+
+      return [arr1, arr2].join(',');
+    }      // Client ID and API key from the Developer Console
+    var CLIENT_ID = '266643809945-7qk12p5fvqj3s3uopaq40cs45dul1vn0.apps.googleusercontent.com';
+    var API_KEY = 'AIzaSyBM84ndf0SpFtXRg-mkiQkGi4f2aRTV2rc';
+
+    // Array of API discovery doc URLs for APIs used by the quickstart
+    var DISCOVERY_DOCS = ["https://script.googleapis.com/$discovery/rest?version=v1", 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'];
+
+    // Authorization scopes required by the API; multiple scopes can be
+    // included, separated by spaces.
+    var SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive';
+
+    var authorizeButton = document.getElementById('authorize_button');
+    var signoutButton = document.getElementById('signout_button');
+
+    /**
+     *  On load, called to load the auth2 library and API client library.
+     */
+    function handleClientLoad() {
+      gapi.load('client:auth2', initClient);
+
+
+    }
+    function execute(callback) {
+      gapi.client.load('drive', 'v2', function () {
+        callback();
+      });
+    }
+
+
+    /**
+     *  Initializes the API client library and sets up sign-in state
+     *  listeners.
+     */
+    function initClient() {
+      console.log("initClient Function")
+      auth2 = gapi.client.init({
+        apiKey: API_KEY,
+        clientId: CLIENT_ID,
+        discoveryDocs: DISCOVERY_DOCS,
+        scope: SCOPES
+      }).then(function () {
+        console.log("initClient Function Callback")
+        // Listen for sign-in state changes.
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        var auth2 = gapi.auth2.getAuthInstance();
+        var profile = auth2.currentUser.get();
+
+
+
+
+        // Handle the initial sign-in state.
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        authorizeButton.onclick = handleAuthClick;
+        signoutButton.onclick = handleSignoutClick;
+      }, function (error) {
+        appendPre(JSON.stringify(error, null, 2));
+      });
+    }
+
+
+
+    /**
+     *  Called when the signed in status changes, to update the UI
+     *  appropriately. After a sign-in, the API is called.
+     */
+    function updateSigninStatus(isSignedIn) {
+      var auth2 = gapi.auth2.getAuthInstance();
+      var profile = auth2.currentUser.get().getBasicProfile();
+      var profile2 = auth2.currentUser.get().getAuthResponse();
+
+      // printFile("1DEtrB5G1cLUos_UUb6m71xysTI6pBXSX")
+      var email = profile.getEmail().toString();
+
+      if (isSignedIn && email.indexOf('hiddengeniusproject') !== -1) {
+        authorizeButton.style.display = 'none';
+        signoutButton.style.display = 'block';
+        printFile("1DEtrB5G1cLUos_UUb6m71xysTI6pBXSX");
+        // retrieveAllFiles()
+        geniusPortalInit();
+      } else {
+        authorizeButton.style.display = 'block';
+        signoutButton.style.display = 'none';
+        window.location.href = "./login.html";
+      }
+    }
+
+    /**
+     *  Sign in the user upon button click.
+     */
+    function handleAuthClick(event) {
+      gapi.auth2.getAuthInstance().signIn();
+    }
+
+    /**
+     *  Sign out the user upon button click.
+     */
+    function handleSignoutClick(event) {
+      gapi.auth2.getAuthInstance().signOut();
+    }
+
+    /**
+     * Append a pre element to the body containing the given message
+     * as its text node. Used to display the results of the API call.
+     *
+     * @param {string} message Text to be placed in pre element.
+     */
+    function appendPre(message) {
+      var pre = document.getElementById('content');
+      var textContent = document.createTextNode(message + '\n');
+      pre.appendChild(textContent);
+    }
+
+    function printFile(fileId) {
+      console.log("PrintFile")
+
+      var request = gapi.client.drive.files.get({
+        'fileId': fileId,
+        alt: 'media'
+      });
+      request.execute(function (resp) {
+        console.log('Title: ' + resp.title);
+        console.log('Description: ' + resp.conceptsb);
+        console.log('MIME type: ' + resp.mimeType);
+      });
+    }
+
+    /**
+     * Shows basic usage of the Apps Script API.
+     *
+     * Call the Apps Script API to create a new script project, upload files
+     * to the project, and log the script's URL to the user.
+     */
+    function geniusPortalInit() {
+      var scriptId = "14DqVwveVm7DW84xpSQsIFeTh4ulrELBicHR-dK5Qsj9DQW-3R-ukgskA";
+      console.log("geniusPortal")
+      // Call the Apps Script API run method
+      //   'scriptId' is the URL parameter that states what script to run
+      //   'resource' describes the run request body (with the function name
+      //              to execute)
+      gapi.client.script.scripts.run({
+        'scriptId': scriptId,
+        'resource': {
+          'function': 'getUserData',
+          'devMode': false
+        }
+      }).then(function (resp) {
+        console.log(resp)
+        var auth2 = gapi.auth2.getAuthInstance();
+        var profile = auth2.currentUser.get().getBasicProfile();
+        var profile2 = auth2.currentUser.get().getAuthResponse();
+
+        setInterval(function () { console.log(formatDate(profile2.expires_at)); }, 2000)
+
+        var result = resp.result;
+        if (result.error && result.error.status) {
+          // The API encountered a problem before the script
+          // started executing.
+          appendPre('Error calling API:');
+          appendPre(JSON.stringify(result, null, 2));
+          console.log("error 1")
+        } else if (result.error) {
+          // The API executed, but the script returned an error.
+          console.log("error 2");
+          console.log(result.error)
+          // Extract the first (and only) set of error details.
+          // The values of this object are the script's 'errorMessage' and
+          // 'errorType', and an array of stack trace elements.
+          var error = result.error.details[0];
+          appendPre('Script error message: ' + error.errorMessage);
+
+          if (error.scriptStackTraceElements) {
+            // There may not be a stacktrace if the script didn't start
+            // executing.
+            appendPre('Script error stacktrace:');
+            for (var i = 0; i < error.scriptStackTraceElements.length; i++) {
+              var trace = error.scriptStackTraceElements[i];
+              appendPre('\t' + trace.function + ':' + trace.lineNumber);
+            }
+          }
+        } else {
+          // The structure of the result will depend upon what the Apps
+          // Script function returns. Here, the function returns an Apps
+          // Script Object with String keys and values, and so the result
+          // is treated as a JavaScript object (folderSet).
+          console.log("Good")
+          console.log(result.response.result)
+          userObj = result.response.result;
+          for (const property in userObj) {
+            console.log('[name ="genius-' + property + '"]');
+
+
+
+
+            if (property == "ttl-stipend") {
+              $('[name ="genius-' + property + '"]').html(userObj[property].toFixed(2));
+            } else {
+
+
+
+              if (property == "ttl-missed-hrs") {
+                var sum = userObj["oh-hrs-attend"] + userObj["pg-hrs-attend"] + userObj["makeup-hrs-attend"];
+                $('[name ="genius-ttl-attend-hrs"]').html(sum)
+
+              }
+              if (property == "perfect-attend") {
+                var color = "#17a2b8";
+                console.log(color + "color");
+                if (userObj[property] == "Perfect") {
+                  color = "#28a745";
+                  $('[name ="genius-' + property + '-amt"]').html("100");
+
+                  $('[name ="genius-' + property + '-color"]').removeClass("fa fa-thumbs-o-down");
+                  $('[name ="genius-' + property + '-color"]').removeClass("transform-icon");
+                  $('[name ="genius-' + property + '-color"]').addClass("fa fa-thumbs-o-up");
+                }
+                else if (userObj[property] == "Almost Perfect") {
+                  $('[name ="genius-' + property + '-amt"]').html("50");
+                  color = "#ffc107";
+                  $('[name ="genius-' + property + '-color"]').removeClass("fa fa-thumbs-o-down");
+                  $('[name ="genius-' + property + '-color"]').addClass("transform-icon");
+                  $('[name ="genius-' + property + '-color"]').addClass("fa fa-thumbs-o-up");
+
+
+                } else if (userObj[property] == "Not Perfect") {
+                  color = "#dc3545";
+                  $('[name ="genius-' + property + '-amt"]').html("0");
+                  $('[name ="genius-' + property + '-color"]').removeClass("fa fa-thumbs-o-up");
+                  $('[name ="genius-' + property + '-color"]').removeClass("transform-icon");
+
+                  $('[name ="genius-' + property + '-color"]').addClass("fa fa-thumbs-o-down");;
+
+                } else {
+                  color = "#17a2b8";
+                  $('[name ="genius-' + property + '-color"]').removeClass("fa fa-thumbs-o-down");
+                  $('[name ="genius-' + property + '-color"]').removeClass("transform-icon");
+                  $('[name ="genius-' + property + '-color"]').addClass("fa fa-thumbs-o-up");
+
+                }
+                console.log($('[name ="genius-' + property + '-color"]'));
+                $('[name ="genius-' + property + '-color"]').css("background-color", color);
+
+              }
+              $('[name ="genius-' + property + '"]').html(userObj[property]);
+
+            }
+          }
+
+
+
+
+        }
+      });
+    }
+
+
+
+  </script>
+
+  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+
+  <!-- Essential javascripts for application to work-->
+  <!--   <script src="js/jquery-3.3.1.min.js"></script>-->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+  <!-- <?!= include('popper.min.js'); ?> -->
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+
+  <!-- <?!= include('calendar.js'); ?> -->
+  <script src="js/calendar.js"></script>
+  <!-- <?!= include('main.js'); ?> -->
+  <script src="js/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="js/plugins/pace.min.js"></script>
+  <!-- <?!= include('pace.min.js'); ?> -->
+  <!-- Page specific javascripts-->
+  <script type="text/javascript" src="js/plugins/chart.js"></script>
+
+
+
+  <script>
+
+    //The reason this, and couple other of my canvas webapps, might be laggy is because the resolution scales up directly with the size of your display. This can be fixed by programmatically adjusting based on requested page resolution..
+
+    var demos = [
+
+      {
+        title: "",
+        background: "#E5E5E5",
+        dataset: {
+          "Business\n CS. Hrs": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Business\n Ent. Hrs": { percentage: 16.66, color: "#00FF00", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Weekly\n App(s)": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Accountable\n Partner": { percentage: 16.66, color: "#00FF00", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Weekly \n Concept(s)": { percentage: 16.66, color: "#00FF00", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
+          "Attendance": { percentage: 16.66, color: "#00FF00", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." }
+        },
+        font: "Copperplate",
+        fullscreen: true,
+        circleRadius: 90,
+        pointerRadius: 230,
+        textRadius: 190,
+        pointerHeadRadii: 7,
+        spacing: 10 * 200 / 300
+      },
+
+      {
+        title: "Animals I Like",
+        background: "#DDDDDD",
+        dataset: { "koalas": { percentage: 100, color: "#007744", story: "Koalas are so cute!" } },
+        font: "	Papyrus",
+        fullscreen: true,
+        circleRadius: 300,
+        pointerRadius: 335,
+        textRadius: 450,
+        pointerHeadRadii: 10,
+        spacing: 10
+      },
+
+
+
+      {
+        title: "Things in my House",
+        background: "#FF3322",
+        dataset: { 'cars': { story: 'cars are sooper fun. They can drive on land but they don\'t work in aquadic conditions. :\'(', color: '#221100', percentage: 35 }, 'giraffes': { story: 'Giraffes are sooooo cute, sometimes they fight each other with their little antenna thingies, but usually they just eat tree leaves.', color: '#0000FF', percentage: 7 }, 'ladybugs': { story: 'lady bugs aren\'t necessarily ladies.', color: '#6600EE', percentage: 55.9 }, 'onion rings': { story: 'Onions rings are sooo tasty, but they are soooo much better when you find one in your order of regular fries.', color: '#FFFF00', percentage: 2.1 } },
+        font: "Copperplate",
+        fullscreen: true,
+        circleRadius: 200,
+        pointerRadius: 230,
+        textRadius: 380,
+        pointerHeadRadii: 7,
+        spacing: 10 * 200 / 300
+      },
+
+    ];
+
+
+    /*var titles = ['cars', 'giraffes', 'ladybugs', 'onion rings'];
+     var stories = ['cars are sooper fun. They can drive on land but they don\'t work in aquadic conditions. :\'(', 'Giraffes are sooooo cute, sometimes they fight each other with their little antenna thingies, but usually they just eat tree leaves.', 'lady bugs aren\'t necessarily ladies.', 'Onions rings are sooo tasty, but they are soooo much better when you find one in your order of regular fries.']
+     var colors = ["#FF0000", "#0000FF", "#FF00FF", "#FFFF00"];
+     var ratios = [.35,.07,.559,.021];
+     var spacing = 10;
+     var radius = 300;
+     var textRadius = 450;
+     var pointerRadius = 335;
+     var pointerHeadRadii = 10;*/
+
+    var settings = demos[0]
+
+
+    var stage;
+    var canvas;
+    var slices;
+    var lastCenter;
+
+    var infoPanel;
+    var transitionArc;
+    var bg;
+    var title;
+    var text;
+    var bar;
+
+    var demoIndex = 0;
+
+    // resize the canvas to fill browser window dynamically
+    function resizeCanvas() {
+      if (settings.fullscreen) {
+        //   console.log(document.getElementsByClassName('pie-container')[0].offsetWidth);
+        canvas.width = document.getElementsByClassName('pie-container')[0].offsetWidth - 25;//window.innerWidth;
+        canvas.height = document.getElementsByClassName('pie-container')[0].offsetHeight;//window.innerHeight;
+      }
+      for (var i = 0; i < stage.children.length; i++) {
+        stage.children[i].x += canvas.width / 2 - lastCenter[0];
+        stage.children[i].y += canvas.height / 2 - lastCenter[1];
+      }
+      lastCenter = [canvas.width / 2, canvas.height / 2];
+    }
+
+    function drawArc(graphics, color, center, radius, s, e) {
+      var stroke = graphics
+        .beginFill(color).moveTo(center[0], center[1])
+        .arc(0, 0, radius, s, e).command;
+      return stroke;
+    }
+
+    function distance(a, b) {
+      return Math.pow(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2), .5);
+    }
+
+    function nextDemo() {
+      demoIndex = (demoIndex + 1) % demos.length;
+      settings = demos[demoIndex];
+      for (var i in slices.children) {
+        slices.children[i].off('mouseover', slices.children[i].mo);
+        slices.children[i].off('mouseout', slices.children[i].ml);
+        slices.children[i].off('click', slices.children[i].mc);
+      }
+      init();
+      //console.debug("hi")
+    }
+
+    function init() {
+
+      stage = new createjs.Stage("PieChart1");
+      canvas = document.getElementById('PieChart1');
+      window.addEventListener('resize', resizeCanvas, false);
+
+      canvas.style.background = settings.background;
+
+      createjs.Ticker.setFPS(60);
+
+      stage.enableMouseOver();
+
+      createjs.Ticker.addEventListener("tick", stage);
+      createjs.Ticker.addEventListener("tick", update);
+      lastCenter = [canvas.width / 2, canvas.height / 2];
+      resizeCanvas();
+
+      slices = new createjs.Container();
+      infoPanel = new createjs.Container();
+
+      var title = new createjs.Text(settings.title, "72px " + settings.font, colourIsLight(settings.background) ? "#000" : "#FFF");
+      title.x = canvas.width / 4;
+      title.y = 100;
+      title.textAlign = "center";
+      stage.addChild(title)
+      stage.addChild(slices);
+
+      //stage.update();
+      /*var titles = ['cars', 'giraffes', 'ladybugs', 'onion rings'];
+      var stories = ['cars are sooper fun. They can drive on land but they don\'t work in aquadic conditions. :\'(', 'Giraffes are sooooo cute, sometimes they fight each other with their little antenna thingies, but usually they just eat tree leaves.', 'lady bugs aren\'t necessarily ladies.', 'Onions rings are sooo tasty, but they are soooo much better when you find one in your order of regular fries.']
+      var colors = ["#FF0000", "#0000FF", "#FF00FF", "#FFFF00"];
+      var ratios = [.35,.07,.559,.021];
+      var spacing = 10;
+      var radius = 300;
+      var textRadius = 450;
+      var pointerRadius = 335;
+      var pointerHeadRadii = 10;*/
+
+      //
+      //colourIsLight(settings.background) ? "#000" : "#FFF"
+
+      var currentAngle = 0;
+      for (var entry in settings.dataset) {
+        var data = settings.dataset[entry];
+        if (data.percentage == 100)
+          settings.spacing = 0;
+        var arc = new createjs.Shape();
+        arc.x = canvas.width / 2;
+        arc.y = canvas.height / 2;
+        var cAngle = currentAngle + Math.PI * data.percentage / 100;
+        var center = [settings.spacing * (Math.cos(cAngle)), settings.spacing * Math.sin(cAngle)]
+        var label = new createjs.Text(entry, "20px " + settings.font, colourIsLight(settings.background) ? "#000" : "#FFF");
+        label.x = arc.x + settings.textRadius * (Math.abs(Math.cos(cAngle)) > .7 ? (Math.cos(cAngle) < 0 ? Math.cos(cAngle) + .05 : Math.cos(cAngle) - .05) : Math.cos(cAngle));
+        label.y = arc.y + settings.textRadius * (Math.abs(Math.sin(cAngle)) > .7 ? (Math.sin(cAngle) < 0 ? Math.sin(cAngle) + .3 : Math.sin(cAngle) - .45) : Math.sin(cAngle) < 0 ? Math.sin(cAngle) + .2 : Math.sin(cAngle) - .2);
+
+        label.textAlign = "center";
+        var line = new createjs.Shape();
+        // line.graphics.beginStroke(colourIsLight(settings.background) ? "#000" : "#FFF").setStrokeStyle(2).moveTo(label.x-label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight()).lineTo(label.x+label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight())
+        //branch from right side
+
+        //         if (distance([label.x+label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight()], [arc.x,arc.y])>distance([label.x-label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight()], [arc.x,arc.y]))
+        //            line.graphics.moveTo(label.x-label.getMeasuredWidth()/2,5+label.y+label.getMeasuredHeight()) //branch from left side
+        //         line.graphics.lineTo(arc.x+settings.pointerRadius*Math.cos(cAngle), arc.y+settings.pointerRadius*Math.sin(cAngle));
+        // line.graphics.moveTo(arc.x+settings.pointerRadius*Math.cos(cAngle)+settings.pointerHeadRadii,arc.y+settings.pointerRadius*Math.sin(cAngle)).beginFill(settings.background).drawCircle(arc.x+settings.pointerRadius*Math.cos(cAngle),arc.y+settings.pointerRadius*Math.sin(cAngle),settings.pointerHeadRadii)
+        //         stage.addChild(line);
+        // label.x-label.getMeasuredWidth()/2;
+        stage.addChild(label);
+        //The following are properties added to the Shape objects so it "remembers" important details about its associated graphics object, and details about the Slice data
+
+        arc.color = data.color;
+        arc.startAngle = currentAngle + settings.spacing / settings.circleRadius;
+        arc.endAngle = currentAngle + 2 * Math.PI * data.percentage / 100;
+        arc.center = center;
+        arc.title = entry;
+        arc.story = data.story;
+        arc.addEventListener("click", goURL, false);
+        arc.cursor = "pointer";
+        var stroke = drawArc(arc.graphics, data.color, center, settings.circleRadius, 0, 0);
+        createjs.Tween.get(stroke)
+          .to({ startAngle: currentAngle + settings.spacing / settings.circleRadius, endAngle: currentAngle + 2 * Math.PI * data.percentage / 100 }, 1000, createjs.Ease.sineInOut);
+        currentAngle = currentAngle + 2 * Math.PI * data.percentage / 100;
+        // arc.saveEvents = function(n,a,b,c){n.mo=a;n.ml=b;n.mc=c;}
+
+        // createjs.Tween.get(arc).wait(1000).call(
+        //   function(event){
+        //     event.target.saveEvents(event.target, event.target.on("mouseover", sliceMouseOver), event.target.on("mouseout", sliceMouseOut), event.target.on("click", sliceMouseClick));
+        //   });
+
+        //console.log(arc);
+        slices.addChild(arc);
+      }
+      var label2 = new createjs.Text("18%", "50px " + settings.font, colourIsLight(settings.background) ? "#000" : "#FFF");
+      label2.x = arc.x;
+      label2.y = arc.y - 25;
+
+      label2.textAlign = "center";
+      stage.addChild(label2);
+
+      //stage.on("stagemousemove", mouseOver);
+
+      stage.update();
+      /*createjs.Tween.get(circle, { loop: true })
+          .to({ x: 400 }, 1000, createjs.Ease.getPowInOut(4))
+          .to({ alpha: 0, y: 125 }, 500, createjs.Ease.getPowInOut(2))
+          .to({ alpha: 0, y: 75 }, 100)
+          .to({ alpha: 1, y: 100 }, 500, createjs.Ease.getPowInOut(2))
+          .to({ x: 100 }, 800, createjs.Ease.getPowInOut(2));*/
+    }
+    init();
+    //use globalized radius below (replace 300)
+    function goURL() {
+      window.open("http://google.com");
+    }
+
+    function sliceMouseOver(event) {
+      event.target.filters = [
+        new createjs.ColorFilter(1, 1, 1, 1, 100, 100, 100, 0)
+      ];
+      event.target.cache(-300, -300, 600, 600);
+    }
+
+    function sliceMouseOut(event) {
+      event.target.filters = [
+        new createjs.ColorFilter(1, 1, 1, 1, 0, 0, 0, 0)
+      ];
+      event.target.cache(-300, -300, 600, 600);
+    }
+
+    function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
+    function colourIsLight(h) {
+
+      // Counting the perceptive luminance
+      // human eye favors green color...
+      var rgb = hexToRgb(h);
+      var a = 1 - (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
+      return (a < 0.5);
+    }
+
+    function sliceMouseClick(event) {
+      if (!stage.contains(infoPanel)) {
+        //stage.setChildIndex( event.target, stage.getNumChildren()-1);
+        infoPanel.children = [];
+        bg = new createjs.Shape();
+        bg.graphics.beginFill(event.target.color).drawRect(0, 0, canvas.width, canvas.height);
+        infoPanel.addChild(bg);
+        transitionArc = new createjs.Shape();
+        transitionArc.x = canvas.width / 2;
+        transitionArc.y = canvas.height / 2;
+        infoPanel.parentSlice = event.target;
+        var stroke = drawArc(transitionArc.graphics, "#000", [0, 0], settings.circleRadius, event.target.startAngle, event.target.endAngle);
+        createjs.Tween.get(stroke)
+          .to({ startAngle: 0, endAngle: 2 * Math.PI, radius: Math.max(canvas.width, canvas.height) * Math.sqrt(2) }, 1000, createjs.Ease.sineInOut);
+        var backButton = new createjs.Shape().set({ x: 60, y: 60 });
+        backButton.graphics.beginStroke(colourIsLight(event.target.color) ? "#000" : "#FFF").setStrokeStyle(6, 'round').drawCircle(0, 0, 40).moveTo(-15, 0).lineTo(5, 20).moveTo(-15, 0).lineTo(5, -20);
+
+        update();
+
+
+        var hit = new createjs.Shape();
+        hit.graphics.beginFill("#000").drawCircle(0, 0, 40);
+        backButton.hitArea = hit;
+        backButton.color = colourIsLight(event.target.color) ? "#000" : "#FFF";
+        backButton.on("mouseover", BBMouseOver);
+        backButton.on("mouseout", BBMouseOut);
+        backButton.on("click", BBMouseClick);
+        infoPanel.addChild(backButton);
+        title = new createjs.Text(event.target.title, "36px " + settings.font, backButton.color);
+        title.textAlign = "center";
+        title.y = 0;
+        title.x = canvas.width / 2;
+        infoPanel.addChild(title);
+        text = new createjs.Text(event.target.story, "36px " + settings.font, backButton.color);
+        text.textAlign = "center";
+        text.y = 150;
+        text.x = canvas.width / 2;
+        text.lineWidth = canvas.width - 50;
+        infoPanel.addChild(text);
+        bar = new createjs.Shape();
+        bar.graphics.beginStroke(colourIsLight(event.target.color) ? "#000" : "#FFF").setStrokeStyle(3, 'round').moveTo(-canvas.width / 2 + 150, 0).lineTo(canvas.width / 2 - 150, 0)
+        bar.x = canvas.width / 2;
+        bar.y = 125;
+        infoPanel.addChild(bar);
+        stage.addChild(infoPanel);
+      }
+    }
+
+    function BBMouseOver(event) {
+      event.target.filters = [
+        new createjs.ColorFilter(1, 1, 1, 1, event.target.color == "#000" ? 100 : -100, event.target.color == "#000" ? 100 : -100, event.target.color == "#000" ? 100 : -100, 0)
+      ];
+      event.target.cache(-45, -45, 90, 90);
+    }
+
+    function BBMouseOut(event) {
+      event.target.filters = [
+        new createjs.ColorFilter(1, 1, 1, 1, 0, 0, 0, 0)
+      ];
+      event.target.cache(-45, -45, 90, 90);
+    }
+
+    function BBMouseClick(event) {
+      //stage.removeChild(infoPanel);
+      transitionArc = new createjs.Shape();
+      transitionArc.x = canvas.width / 2;
+      transitionArc.y = canvas.height / 2;
+      //stage.addChild(transitionArc);
+      var stroke = drawArc(transitionArc.graphics, event.target.parent.parentSlice.color, event.target.parent.parentSlice.center, Math.max(canvas.width, canvas.height) * Math.sqrt(2), 0, 2 * Math.PI);
+
+      //var stroke = drawArc(arc.graphics, event.target.color, [0,0], 300, event.target.startAngle, event.target.endAngle);
+      createjs.Tween.get(stroke)
+        .to({ startAngle: event.target.parent.parentSlice.startAngle, endAngle: event.target.parent.parentSlice.endAngle, radius: settings.circleRadius }, 1000, createjs.Ease.sineInOut).call(function () { stage.removeChild(infoPanel); });
+    }
+
+    function update() {
+      if (transitionArc && infoPanel) {
+        transitionArc.x = canvas.width / 2;
+        transitionArc.y = canvas.height / 2;
+        bg.graphics.drawRect(0, 0, canvas.width, canvas.height);
+
+        if (title && text && bar) {
+          title.y = 30;
+          title.x = canvas.width / 2;
+          text.y = 150;
+          text.x = canvas.width / 2;
+          bar.x = canvas.width / 2;
+          bar.y = 125;
+        }
+
+        infoPanel.x = infoPanel.y = 0;
+        transitionArc.cache(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+        transitionArc.updateCache();
+        maskFilter = new createjs.AlphaMaskFilter(transitionArc.cacheCanvas);
+        infoPanel.filters = [maskFilter];
+        infoPanel.cache(0, 0, canvas.width, canvas.height);
+        infoPanel.updateCache(0, 0, canvas.width, canvas.height);
+      }
+      /*for (var i=0; i<slices.children.length; i++)
+        {
+          slices.children[i].x = canvas.width/2;
+          slices.children[i].y = canvas.height/2;
+        }*/
+    }
+
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <?!= include('chart.js'); ?> -->
+  <script type="text/javascript">
+    var data = {
+      labels: ["", "Summer 1", "Fall", "Spring", "Summer 2"],
+      datasets: [
+        {
+          label: "My First dataset",
+          fillColor: "rgba(220,220,220,0.2)",
+          strokeColor: "rgba(220,220,220,1)",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          data: [0, 59, 80, 81, 56, 55]
+        },
+        {
+          label: "My Second dataset",
+          fillColor: "rgba(151,187,205,0.2)",
+          strokeColor: "rgba(151,187,205,1)",
+          pointColor: "rgba(151,187,205,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          data: [28, 48, 40, 19, 86, 55]
+        }
+      ]
+    };
+    var pdata = [
+      {
+        value: 300,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Complete"
+      },
+      {
+        value: 50,
+        color: "#F7464A",
+        highlight: "#FF5A5E",
+        label: "In-Progress"
+      }
+    ]
+
+    var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+    var lineChart = new Chart(ctxl).Line(data);
+
+    var ctxp = $("#pieChartDemo").get(0).getContext("2d");
+    var pieChart = new Chart(ctxp).Pie(pdata);
+  </script>
+  <!-- Google analytics script-->
+  <script type="text/javascript">
+    if (document.location.hostname == 'pratikborsadiya.in') {
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('create', 'UA-72504830-1', 'auto');
+      ga('send', 'pageview');
+    }
+  </script>
+
+
+  <script>
+    // todo list javascript
+    var filters = {
+      all: function (todos) {
+        return todos;
+      },
+      complete: function (todos) {
+        return todos.filter(function (todo) {
+          return todo.complete;
+        });
+      },
+      incomplete: function (todos) {
+        return todos.filter(function (todo) {
+          return !todo.complete;
+        });
+      }
+    }
+
+    var STORAGE_KEY = 'vue-js-todo-P7oZi9sL'
+    var todoStorage = {
+      fetch: function () {
+        var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        return todos;
+      },
+      save: function (todos) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+      }
+    }
+
+    var app = new Vue({
+      el: '#todo-app',
+      data: {
+        inputVal: '',
+        todos: todoStorage.fetch(),
+        visibility: 'all'
+      },
+      watch: {
+        todos: {
+          handler: function (todos) {
+            todoStorage.save(todos);
+          }
+        }
+      },
+      computed: {
+        filteredTodos: function () {
+          return filters[this.visibility](this.todos);
+        }
+      },
+      methods: {
+        addTodo: function (e) {
+          e.preventDefault();
+          if (this.inputVal) {
+            this.todos.push({
+              text: this.inputVal,
+              complete: false
+            });
+          }
+          this.inputVal = '';
+        },
+        toggleTodo: function (todo) {
+          todo.complete = !todo.complete;
+        },
+        filterTodos: function (filter) {
+          this.visibility = filter;
+        },
+        deleteTodo: function (index) {
+          this.todos.splice(index, 1);
+        }
+      }
+    });
+  </script>
+
+
+
+</body>
+
+</html>

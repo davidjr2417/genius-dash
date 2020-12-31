@@ -1,0 +1,237 @@
+
+
+.genius-input-container {
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .genius-input-container input
+   {
+    padding: .5rem 0;
+    border: none;
+    border-bottom: 2px solid #999;
+    color: #999;
+    -webkit-transition: all ease-in .5s;
+    transition: all ease-in .5s;
+  }
+
+  .genius-input-container textarea
+   {
+    padding: .5rem 0;
+    border: 2px solid #999;
+    color: #999;
+    -webkit-transition: all ease-in .5s;
+    transition: all ease-in .5s;
+  }
+  .genius-input-container input:focus, .genius-input-container input:active{
+    outline: none;
+    border-bottom: 2px solid cornflowerblue;
+    color: #000;
+  }
+  .genius-input-container textarea:focus, .genius-input-container textarea:active 
+  {
+    outline: none;
+    border: 2px solid cornflowerblue;
+    color: #000;
+  }
+  .genius-input-container input:focus + label, .genius-input-container input:active + label,
+  .genius-input-container textarea:focus + label, .genius-input-container textarea:active + label
+   {
+    top: -.5rem;
+    color: cornflowerblue;
+    -webkit-transform: translateY(-50%) scale(1.125);
+            transform: translateY(-50%) scale(1.125);
+    font-style: normal;
+  }
+  .genius-input-container textarea:focus + label, .genius-input-container textarea:active + label
+  {
+   top: -.75rem;
+  } 
+  .genius-input-container input.filled,
+  .genius-input-container textarea.filled 
+  {
+    color: #000;
+    border-color: cornflowerblue;
+  }
+  .genius-input-container input.filled + label,
+  .genius-input-container textarea.filled + label 
+  {
+    top: -.5rem;
+    color: cornflowerblue;
+    -webkit-transform: translateY(-50%) scale(1.125);
+            transform: translateY(-50%) scale(1.125);
+    font-style: normal;
+  }
+  .genius-input-container textarea.filled + label 
+  {
+    top: -.75rem;
+  }
+  .genius-input-container label {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    pointer-events: none;
+    -webkit-transition: all ease-in-out .5s;
+    transition: all ease-in-out .5s;
+    color: #999;
+    font-style: italic;
+    text-transform: uppercase;
+  }
+  .genius-input-container label::-moz-selection {
+    background: transparent;
+  }
+  .genius-input-container label::selection {
+    background: transparent;
+  }
+  .genius-attend-form input[type="text"],
+  .genius-attend-form textarea
+   {
+      width:100%;
+
+  }
+  .genius-attend-submit-container{
+      width:100%;
+      margin: 0 auto;
+  }
+  .genius-attend-submit-container div{
+      width:50%;
+      margin: 0 auto;
+  }
+  .genius-attend-form{
+      /* width:600px; */
+  }
+  .genius-attend-form a {
+      text-decoration: none ;
+    width: 100%;
+    padding: .5em;
+    color: #999;
+    background: transparent;
+    border: 2px solid #999;
+    -webkit-transition: all ease-in-out .5s;
+    transition: all ease-in-out .5s;
+    text-transform: uppercase;
+    text-align:center;
+    margin:0;
+  }
+  .genius-attend-form a:hover {
+    text-decoration: none ;
+    border-color:#007bff;
+
+  }
+  .genius-attend-form input[type="submit"]:hover, .genius-attend-form input[type="submit"]:focus {
+    color: cornflowerblue;
+    border-color: cornflowerblue;
+    outline: none;
+  }
+  .genius-attend-form input[type="submit"]:click {
+    background-color: cornflowerblue;
+  }
+
+  
+  .genius-attend-container{
+      width:100%;
+  }
+
+  .fake-link{
+     color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer; 
+  }
+  .fake-link:hover{
+     color: #007bff;
+    text-decoration: underline;
+  }
+
+  .genius-attend-modal{
+      padding:40px 20px 20px;
+  }
+
+
+
+
+
+  .modal-confirm {		
+	color: #636363;
+	width: 400px;
+}
+.modal-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	font-size: 14px;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -10px;
+}
+.modal-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -2px;
+}
+.modal-confirm .modal-body {
+	color: #999;
+}
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;		
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+	color: #999;
+}		
+.modal-confirm .icon-box {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	border-radius: 50%;
+	z-index: 9;
+	text-align: center;
+	border: 3px solid #f15e5e;
+}
+.modal-confirm .icon-box i {
+	color: #f15e5e;
+	font-size: 46px;
+	display: inline-block;
+	margin-top: 13px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #fff;
+	border-radius: 4px;
+	background: #60c7c1;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+	background: #c1c1c1;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+	background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+	background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+	background: #ee3535;
+}
+.trigger-btn {
+	display: inline-block;
+	/* margin: 100px auto; */
+}
+

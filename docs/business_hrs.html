@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Genius Concepts</title>
+ 
+  <!-- Main CSS-->
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/main2.css">
+  <link rel="stylesheet" href="./css/invoice.css"> 
+
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="license" href="https://www.opensource.org/licenses/mit-license/">
+ 
+    <script src="https://cdn.rawgit.com/bm-w/d3/master/d3.js"></script>
+
+</head>
+
+<body class="app sidebar-mini">
+  
+  <!-- Navbar-->
+  <header class="app-header"><a class="app-header__logo" href="index.html">Vali</a>
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+      aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+      <li class="app-search">
+        <input class="app-search__input" type="search" placeholder="Search">
+        <button class="app-search__button"><i class="fa fa-search"></i></button>
+      </li>
+      <!--Notification Menu-->
+      <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i
+            class="fa fa-bell-o fa-lg"></i></a>
+        <ul class="app-notification dropdown-menu dropdown-menu-right">
+          <li class="app-notification__title">You have 4 new notifications.</li>
+          <div class="app-notification__content">
+            <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                    class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i
+                      class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                <div>
+                  <p class="app-notification__message">Lisa sent you a mail</p>
+                  <p class="app-notification__meta">2 min ago</p>
+                </div>
+              </a></li>
+            <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                    class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i
+                      class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                <div>
+                  <p class="app-notification__message">Mail server not working</p>
+                  <p class="app-notification__meta">5 min ago</p>
+                </div>
+              </a></li>
+            <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                    class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i
+                      class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                <div>
+                  <p class="app-notification__message">Transaction complete</p>
+                  <p class="app-notification__meta">2 days ago</p>
+                </div>
+              </a></li>
+            <div class="app-notification__content">
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                      class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i
+                        class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">Lisa sent you a mail</p>
+                    <p class="app-notification__meta">2 min ago</p>
+                  </div>
+                </a></li>
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                      class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i
+                        class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">Mail server not working</p>
+                    <p class="app-notification__meta">5 min ago</p>
+                  </div>
+                </a></li>
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                      class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i
+                        class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">Transaction complete</p>
+                    <p class="app-notification__meta">2 days ago</p>
+                  </div>
+                </a></li>
+            </div>
+          </div>
+          <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+        </ul>
+      </li>
+      <!-- User Menu-->
+      <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i
+            class="fa fa-user fa-lg"></i></a>
+        <ul class="dropdown-menu settings-menu dropdown-menu-right">
+          <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
+          <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+          <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user text-center">
+      <img class="app-sidebar__user-avatar"
+        src="https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png" width="50"
+        height="50" alt="User Image">
+      <div>
+        <p class="app-sidebar__user-designation" name="genius-cohort">Loading...</p>
+        <p class="app-sidebar__user-name">
+          <span name="genius-fn"> Loading...</span>
+          <span name="genius-fn"></span>
+        </p>
+        
+        <p class="app-sidebar__user-designation genius-cohort" name="genius-email">Loading...</p>
+        <p class="app-sidebar__user-designation"><a href="https://www.hiddengeniusproject.org/about/">Mission
+            Statement</a></p>
+        <p class="app-sidebar__user-designation">Business Git Hub Link  <span style="font-size:10px; float:right; line-height: 20px;"> Edit</span></p>
+
+      </div>
+    </div>
+    <ul class="app-menu">
+        <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        
+      
+        <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Concepts</span></a></li>
+        
+        <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Business Hours</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Accountability</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Attendance</span></a></li>
+      
+      </ul>
+  </aside>
+  <main class="app-content">
+    <div class="app-title">
+      <div>
+        <h1><i class="fa fa-dashboard"></i> Welcome Back, <span name="genius-fn"></span> </h1>
+        <p>Quick View Our Your Information</p>
+        <button id="authorize_button" >Authorize</button>
+        <button id="signout_button">Sign Out</button>
+      </di
+      v>
+      <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+      </ul>
+    </div>
+    </div>
+
+      <div class=" genius-main-data">
+          <div class="row">
+              <div class="col-12 col-lg-8">
+                  <div class="genius-levels-tracker">
+
+                  </div>
+              </div>
+              <style>.icon{
+                font-family:fontawesome;
+                font-weight:bold;
+                font-size:30px;
+              
+              }
+              .goal,.completed{
+                font-family: 'Roboto','Myriad Set Pro', 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+                fill:white;
+                text-anchor:middle;
+              }
+              .goal{
+                font-size: 22px;
+              
+              
+              }
+              .completed{
+                font-size: 40px;
+              }</style>
+<script>
+    	//based on https://bl.ocks.org/mbostock/1096355
+	//apple design:https://images.apple.com/watch/features/images/fitness_large.jpg
+	"use strict";
+
+(function(){
+    var gap = 2;
+
+
+
+    var ranDataset2 = function () {
+        var ran = Math.random();
+
+        return    [
+            {index: 0, name: 'move', icon: "\uF105", percentage:  100}
+        ];
+
+    };
+    var colors = ["#e90b3a", "#a0ff03", "#1ad5de"];
+    var width = 300,
+            height = 300,
+            τ = 2 * Math.PI;
+
+    function build(dataset,singleArcView){
+
+        var arc = d3.svg.arc()
+                .startAngle(0)
+                .endAngle(function (d) {
+                    return d.percentage / 100 * τ;
+                })
+                .innerRadius(function (d) {
+                    return 85 - d.index * (20 + gap)
+                })
+                .outerRadius(function (d) {
+                    return 110 - d.index * (20 + gap)
+                })
+                .cornerRadius(10);//modified d3 api only
+
+        var background = d3.svg.arc()
+                .startAngle(0)
+                .endAngle(τ)
+                .innerRadius(function (d, i) {
+                    return 85 - d.index * (20 + gap)
+                })
+                .outerRadius(function (d, i) {
+                    return 110 - d.index * (20 + gap)
+                });
+
+        var svg = d3.select(".genius-levels-tracker").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        //add linear gradient, notice apple uses gradient alone the arc..
+        //meh, close enough...
+
+
+        var gradient = svg.append("svg:defs")
+                .append("svg:linearGradient")
+                .attr("id", "gradient")
+                .attr("x1", "0%")
+                .attr("y1", "100%")
+                .attr("x2", "50%")
+                .attr("y2", "0%")
+                .attr("spreadMethod", "pad");
+
+        gradient.append("svg:stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#fe08b5")
+                .attr("stop-opacity", 1);
+
+        gradient.append("svg:stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#ff1410")
+                .attr("stop-opacity", 1);
+
+
+        //add some shadows
+        var defs = svg.append("defs");
+
+        var filter = defs.append("filter")
+                .attr("id", "dropshadow")
+
+        filter.append("feGaussianBlur")
+                .attr("in", "SourceAlpha")
+                .attr("stdDeviation", 4)
+                .attr("result", "blur");
+        filter.append("feOffset")
+                .attr("in", "blur")
+                .attr("dx", 1)
+                .attr("dy", 1)
+                .attr("result", "offsetBlur");
+
+        var feMerge = filter.append("feMerge");
+
+        feMerge.append("feMergeNode")
+                .attr("in", "offsetBlur");
+        feMerge.append("feMergeNode")
+                .attr("in", "SourceGraphic");
+
+        var field = svg.selectAll("g")
+                .data(dataset)
+                .enter().append("g");
+
+        field.append("path").attr("class", "progress").attr("filter", "url(#dropshadow)");
+
+        field.append("path").attr("class", "bg")
+                .style("fill", function (d) {
+                    return colors[d.index];
+                })
+                .style("opacity", 0.2)
+                .attr("d", background);
+
+        field.append("text").attr('class','icon');
+
+
+        if(singleArcView){
+
+            field.append("text").attr('class','goal').text("OF 200 CALS").attr("transform","translate(0,30)");
+            field.append("text").attr('class','completed').attr("transform","translate(0,-10)");
+field.append("text").attr('class','goal').text("OF 600 CALS").attr("transform","translate(0,135)");
+        }
+
+        d3.transition().duration(1750).each(update);
+
+        function update() {
+            field = field
+                    .each(function (d) {
+                        this._value = d.percentage;
+                    })
+                    .data(dataset)
+                    .each(function (d) {
+                        d.previousValue = this._value;
+                    });
+
+            field.select("path.progress").transition().duration(1750).delay(function (d, i) {
+                return i * 200
+            })
+                    .ease("elastic")
+                    .attrTween("d", arcTween)
+                    .style("fill", function (d) {
+                        if(d.index===0){
+                            return "url(#gradient)"
+                        }
+                        return colors[d.index];
+                    });
+
+            field.select("text.icon").text(function (d) {
+                return d.icon;
+            }).attr("transform", function (d) {
+                        return "translate(10," + -(150 - d.index * (40 + gap)) + ")"
+
+                    });
+
+            field.select("text.completed").text(function (d) {
+                return 3;
+            });
+
+            setTimeout(update, 2000);
+
+        }
+
+        function arcTween(d) {
+            var i = d3.interpolateNumber(d.previousValue, d.percentage);
+            return function (t) {
+                d.percentage = i(t);
+                return arc(d);
+            };
+        }
+
+
+    }
+
+
+
+    build(ranDataset2,true);
+
+
+})()
+
+
+</script>
+
+            
+          </div>
+        <div class="row">
+            <header>
+                <h1>Invoice</h1>
+                <address contenteditable>
+                    <p>Jonathan Neal</p>
+                    <p>101 E. Chapman Ave<br>Orange, CA 92866</p>
+                    <p>(800) 555-1234</p>
+                </address>
+                <span><img alt="" src="http://www.jonathantneal.com/examples/invoice/logo.png"><input type="file" accept="image/*"></span>
+            </header>
+            <article>
+                <h1>Recipient</h1>
+                <address contenteditable>
+                    <p>Some Company<br>c/o Some Guy</p>
+                </address>
+                <table class="meta">
+                    <tr>
+                        <th><span contenteditable>Invoice #</span></th>
+                        <td><span contenteditable>101138</span></td>
+                    </tr>
+                    <tr>
+                        <th><span contenteditable>Date</span></th>
+                        <td><span contenteditable>January 1, 2012</span></td>
+                    </tr>
+                    <tr>
+                        <th><span contenteditable>Amount Due</span></th>
+                        <td><span id="prefix" contenteditable>$</span><span>600.00</span></td>
+                    </tr>
+                </table>
+                <table class="inventory">
+                    <thead>
+                        <tr>
+                            <th><span contenteditable>Item</span></th>
+                            <th><span contenteditable>Description</span></th>
+                            <th><span contenteditable>Rate</span></th>
+                            <th><span contenteditable>Quantity</span></th>
+                            <th><span contenteditable>Price</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a class="cut">-</a><span contenteditable>Front End Consultation</span></td>
+                            <td><span contenteditable>Experience Review</span></td>
+                            <td><span data-prefix>$</span><span contenteditable>150.00</span></td>
+                            <td><span contenteditable>4</span></td>
+                            <td><span data-prefix>$</span><span>600.00</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="add">+</a>
+                <table class="balance">
+                    <tr>
+                        <th><span contenteditable>Total</span></th>
+                        <td><span data-prefix>$</span><span>600.00</span></td>
+                    </tr>
+                    <tr>
+                        <th><span contenteditable>Amount Paid</span></th>
+                        <td><span data-prefix>$</span><span contenteditable>0.00</span></td>
+                    </tr>
+                    <tr>
+                        <th><span contenteditable>Balance Due</span></th>
+                        <td><span data-prefix>$</span><span>600.00</span></td>
+                    </tr>
+                </table>
+            </article>
+            <aside>
+                <h1><span contenteditable>Additional Notes</span></h1>
+                <div contenteditable>
+                    <p>A finance charge of 1.5% will be made on unpaid balances after 30 days.</p>
+                </div>
+            </aside>
+        </div>
+
+   
+   
+   
+   
+   
+    </div>
+    
+   
+  </main>
+
+<script>
+
+    /* Shivving (IE8 is not supported, but at least it won't look as awful)
+/* ========================================================================== */
+
+(function (document) {
+	var
+	head = document.head = document.getElementsByTagName('head')[0] || document.documentElement,
+	elements = 'article aside audio bdi canvas data datalist details figcaption figure footer header hgroup mark meter nav output picture progress section summary time video x'.split(' '),
+	elementsLength = elements.length,
+	elementsIndex = 0,
+	element;
+
+	while (elementsIndex < elementsLength) {
+		element = document.createElement(elements[++elementsIndex]);
+	}
+
+	element.innerHTML = 'x<style>' +
+		'article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block}' +
+		'audio[controls],canvas,video{display:inline-block}' +
+		'[hidden],audio{display:none}' +
+		'mark{background:#FF0;color:#000}' +
+	'</style>';
+
+	return head.insertBefore(element.lastChild, head.firstChild);
+})(document);
+
+/* Prototyping
+/* ========================================================================== */
+
+(function (window, ElementPrototype, ArrayPrototype, polyfill) {
+	function NodeList() { [polyfill] }
+	NodeList.prototype.length = ArrayPrototype.length;
+
+	ElementPrototype.matchesSelector = ElementPrototype.matchesSelector ||
+	ElementPrototype.mozMatchesSelector ||
+	ElementPrototype.msMatchesSelector ||
+	ElementPrototype.oMatchesSelector ||
+	ElementPrototype.webkitMatchesSelector ||
+	function matchesSelector(selector) {
+		return ArrayPrototype.indexOf.call(this.parentNode.querySelectorAll(selector), this) > -1;
+	};
+
+	ElementPrototype.ancestorQuerySelectorAll = ElementPrototype.ancestorQuerySelectorAll ||
+	ElementPrototype.mozAncestorQuerySelectorAll ||
+	ElementPrototype.msAncestorQuerySelectorAll ||
+	ElementPrototype.oAncestorQuerySelectorAll ||
+	ElementPrototype.webkitAncestorQuerySelectorAll ||
+	function ancestorQuerySelectorAll(selector) {
+		for (var cite = this, newNodeList = new NodeList; cite = cite.parentElement;) {
+			if (cite.matchesSelector(selector)) ArrayPrototype.push.call(newNodeList, cite);
+		}
+
+		return newNodeList;
+	};
+
+	ElementPrototype.ancestorQuerySelector = ElementPrototype.ancestorQuerySelector ||
+	ElementPrototype.mozAncestorQuerySelector ||
+	ElementPrototype.msAncestorQuerySelector ||
+	ElementPrototype.oAncestorQuerySelector ||
+	ElementPrototype.webkitAncestorQuerySelector ||
+	function ancestorQuerySelector(selector) {
+		return this.ancestorQuerySelectorAll(selector)[0] || null;
+	};
+})(this, Element.prototype, Array.prototype);
+
+/* Helper Functions
+/* ========================================================================== */
+
+function generateTableRow() {
+	var emptyColumn = document.createElement('tr');
+
+	emptyColumn.innerHTML = '<td><a class="cut">-</a><span contenteditable></span></td>' +
+		'<td><span contenteditable></span></td>' +
+		'<td><span data-prefix>$</span><span contenteditable>0.00</span></td>' +
+		'<td><span contenteditable>0</span></td>' +
+		'<td><span data-prefix>$</span><span>0.00</span></td>';
+
+	return emptyColumn;
+}
+
+function parseFloatHTML(element) {
+	return parseFloat(element.innerHTML.replace(/[^\d\.\-]+/g, '')) || 0;
+}
+
+function parsePrice(number) {
+	return number.toFixed(2).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,');
+}
+
+/* Update Number
+/* ========================================================================== */
+
+function updateNumber(e) {
+	var
+	activeElement = document.activeElement,
+	value = parseFloat(activeElement.innerHTML),
+	wasPrice = activeElement.innerHTML == parsePrice(parseFloatHTML(activeElement));
+
+	if (!isNaN(value) && (e.keyCode == 38 || e.keyCode == 40 || e.wheelDeltaY)) {
+		e.preventDefault();
+
+		value += e.keyCode == 38 ? 1 : e.keyCode == 40 ? -1 : Math.round(e.wheelDelta * 0.025);
+		value = Math.max(value, 0);
+
+		activeElement.innerHTML = wasPrice ? parsePrice(value) : value;
+	}
+
+	updateInvoice();
+}
+
+/* Update Invoice
+/* ========================================================================== */
+
+function updateInvoice() {
+	var total = 0;
+	var cells, price, total, a, i;
+
+	// update inventory cells
+	// ======================
+
+	for (var a = document.querySelectorAll('table.inventory tbody tr'), i = 0; a[i]; ++i) {
+		// get inventory row cells
+		cells = a[i].querySelectorAll('span:last-child');
+
+		// set price as cell[2] * cell[3]
+		price = parseFloatHTML(cells[2]) * parseFloatHTML(cells[3]);
+
+		// add price to total
+		total += price;
+
+		// set row total
+		cells[4].innerHTML = price;
+	}
+
+	// update balance cells
+	// ====================
+
+	// get balance cells
+	cells = document.querySelectorAll('table.balance td:last-child span:last-child');
+
+	// set total
+	cells[0].innerHTML = total;
+
+	// set balance and meta balance
+	cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
+
+	// update prefix formatting
+	// ========================
+
+	var prefix = document.querySelector('#prefix').innerHTML;
+	for (a = document.querySelectorAll('[data-prefix]'), i = 0; a[i]; ++i) a[i].innerHTML = prefix;
+
+	// update price formatting
+	// =======================
+
+	for (a = document.querySelectorAll('span[data-prefix] + span'), i = 0; a[i]; ++i) if (document.activeElement != a[i]) a[i].innerHTML = parsePrice(parseFloatHTML(a[i]));
+}
+
+/* On Content Load
+/* ========================================================================== */
+
+function onContentLoad() {
+	updateInvoice();
+
+	var
+	input = document.querySelector('input'),
+	image = document.querySelector('img');
+
+	function onClick(e) {
+		var element = e.target.querySelector('[contenteditable]'), row;
+
+		element && e.target != document.documentElement && e.target != document.body && element.focus();
+
+		if (e.target.matchesSelector('.add')) {
+			document.querySelector('table.inventory tbody').appendChild(generateTableRow());
+		}
+		else if (e.target.className == 'cut') {
+			row = e.target.ancestorQuerySelector('tr');
+
+			row.parentNode.removeChild(row);
+		}
+
+		updateInvoice();
+	}
+
+	function onEnterCancel(e) {
+		e.preventDefault();
+
+		image.classList.add('hover');
+	}
+
+	function onLeaveCancel(e) {
+		e.preventDefault();
+
+		image.classList.remove('hover');
+	}
+
+	function onFileInput(e) {
+		image.classList.remove('hover');
+
+		var
+		reader = new FileReader(),
+		files = e.dataTransfer ? e.dataTransfer.files : e.target.files,
+		i = 0;
+
+		reader.onload = onFileLoad;
+
+		while (files[i]) reader.readAsDataURL(files[i++]);
+	}
+
+	function onFileLoad(e) {
+		var data = e.target.result;
+
+		image.src = data;
+	}
+
+	if (window.addEventListener) {
+		document.addEventListener('click', onClick);
+
+		document.addEventListener('mousewheel', updateNumber);
+		document.addEventListener('keydown', updateNumber);
+
+		document.addEventListener('keydown', updateInvoice);
+		document.addEventListener('keyup', updateInvoice);
+
+		input.addEventListener('focus', onEnterCancel);
+		input.addEventListener('mouseover', onEnterCancel);
+		input.addEventListener('dragover', onEnterCancel);
+		input.addEventListener('dragenter', onEnterCancel);
+
+		input.addEventListener('blur', onLeaveCancel);
+		input.addEventListener('dragleave', onLeaveCancel);
+		input.addEventListener('mouseout', onLeaveCancel);
+
+		input.addEventListener('drop', onFileInput);
+		input.addEventListener('change', onFileInput);
+	}
+}
+
+window.addEventListener && document.addEventListener('DOMContentLoaded', onContentLoad);
+
+</script>
+  </body>
+</html>
+
+

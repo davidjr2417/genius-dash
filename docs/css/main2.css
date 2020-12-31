@@ -1,0 +1,16 @@
+
+
+.transform-icon:before{
+  transform: rotate(90deg);
+}
+
+.money .icon{
+background-color:#85bb65 !important;
+}
+.fa-dollar-sign:before{
+ content:'\f155';
+}
+
+.genius-main-data{
+  margin-bottom:20px;
+}
