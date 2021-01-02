@@ -18,7 +18,7 @@ html {
   
   #calendar {
     min-width: 16.25em;
-    max-width: 100%;
+    max-width: 100;
     box-shadow: 0px 0px 8px 0px rgba(44, 62, 80, 0.4);
     background: #fff;
     margin: 0 auto;

@@ -100,7 +100,7 @@ const renderNotes = (notes, filters) => {
         return title.includes(filter) || //updatedAt.includes(filter) ||
          body.includes(filter);
     })
-console.log(filteredNotes)
+//console.log(filteredNotes)
     notesEl.innerHTML = '';
 
     if (filteredNotes.length > 0){

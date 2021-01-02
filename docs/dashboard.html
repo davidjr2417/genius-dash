@@ -811,19 +811,7 @@
       pre.appendChild(textContent);
     }
 
-    function printFile(fileId) {
-      console.log("PrintFile")
-
-      var request = gapi.client.drive.files.get({
-        'fileId': fileId,
-        alt: 'media'
-      });
-      request.execute(function (resp) {
-        console.log('Title: ' + resp.title);
-        console.log('Description: ' + resp.conceptsb);
-        console.log('MIME type: ' + resp.mimeType);
-      });
-    }
+   
 
     /**
      * Shows basic usage of the Apps Script API.

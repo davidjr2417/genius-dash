@@ -134,7 +134,6 @@ if (error.scriptStackTraceElements) {
 // Script Object with String keys and values, and so the result
 // is treated as a JavaScript object (folderSet).
 
-console.log("z")
 }
 });
 }
@@ -185,8 +184,8 @@ function geniusPortalInit() {
   // is treated as a JavaScript object (folderSet).
   
   var folderSet = result.response.result;
-console.log(result);
-console.log("result2"+result.response.result)
+//console.log(result);
+//console.log("result2"+result.response.result)
   }
   });
   }
