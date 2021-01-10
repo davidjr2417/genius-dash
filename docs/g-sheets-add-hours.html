@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .quantity {
+            position: relative;
+        }
+        
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        .quantity input {
+            width: 75px;
+            height: 42px;
+            line-height: 1.65;
+            float: left;
+            display: block;
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+            border: 1px solid #eee;
+        }
+        
+        .quantity input#topic-title {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 100%;
+            height: 42px;
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+            border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+            border-image: none;
+            border-radius: 6px 6px 6px 6px;
+            border-style: none solid solid none;
+            border-width: medium 1px 1px medium;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+            color: #555555;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 1em;
+            line-height: 1.4em;
+            padding: 5px 8px;
+            transition: background-color 0.2s ease 0s;
+        }
+        
+        .quantity input:focus {
+            outline: 0;
+        }
+        
+        .quantity input#topic-title:focus {
+            background: none repeat scroll 0 0 #FFFFFF;
+            outline-width: 0;
+        }
+        
+        .quantity-nav {
+            float: left;
+            position: relative;
+            height: 42px;
+        }
+        
+        .quantity-button {
+            position: relative;
+            cursor: pointer;
+            border-left: 1px solid #eee;
+            width: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 13px;
+            font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+            line-height: 1.7;
+            -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+        
+        .quantity-button.quantity-up {
+            position: absolute;
+            height: 50%;
+            top: 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .quantity-button.quantity-down {
+            position: absolute;
+            bottom: -1px;
+            height: 50%;
+        }
+        
+        textarea {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 100%;
+            height: 100px;
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+            border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+            border-image: none;
+            border-radius: 6px 6px 6px 6px;
+            border-style: none solid solid none;
+            border-width: medium 1px 1px medium;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+            color: #555555;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 1em;
+            line-height: 1.4em;
+            padding: 5px 8px;
+            transition: background-color 0.2s ease 0s;
+        }
+        
+        textarea:focus {
+            background: none repeat scroll 0 0 #FFFFFF;
+            outline-width: 0;
+        }
+        
+        .col-12 {
+            margin-top: 10px;
+        }
+        /* SELECT OPTION CSS */
+        
+        .select-container .select-hidden {
+            display: none;
+            visibility: hidden;
+            padding-right: 10px;
+        }
+        
+        .select-container .select {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            font-size: 16px;
+            color: #000;
+            width: 220px;
+            height: 40px;
+        }
+        
+        .select-container .select-styled {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 8px 15px;
+            -moz-transition: all 0.2s ease-in;
+            -o-transition: all 0.2s ease-in;
+            -webkit-transition: all 0.2s ease-in;
+            transition: all 0.2s ease-in;
+            background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+            border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+            border-image: none;
+            border-radius: 6px 6px 6px 6px;
+            border-style: none solid solid none;
+            border-width: medium 1px 1px medium;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+            color: #555555;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 1em;
+            transition: background-color 0.2s ease 0s;
+        }
+        
+        .select-container .select-styled:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border: 7px solid transparent;
+            border-color: #000 transparent transparent transparent;
+            position: absolute;
+            top: 16px;
+            right: 10px;
+        }
+        
+        .select-container .select-styled:hover {
+            background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .select-container .select-styled:active,
+        .select-styled.active {
+            background: none repeat scroll 0 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .select-container .select-styled:active:after,
+        .select-styled.active:after {
+            top: 9px;
+            border-color: transparent transparent #fff transparent;
+        }
+        
+        .select-container .select-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            z-index: 999;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            background: none repeat scroll 0 0 rgb(216, 216, 216);
+        }
+        
+        .select-container .select-options li {
+            margin: 0;
+            padding: 12px 0;
+            text-indent: 15px;
+            border-top: 1px solid #858585;
+            -moz-transition: all 0.15s ease-in;
+            -o-transition: all 0.15s ease-in;
+            -webkit-transition: all 0.15s ease-in;
+            transition: all 0.15s ease-in;
+        }
+        
+        .select-container .select-options li:hover {
+            color: #c0392b;
+            background: #fff;
+            font-weight: 700;
+        }
+        
+        .select-container .select-options li[rel="hide"] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form class="container">
+        <div class="row">
+
+
+            <div id="week-name-container" class="col-12 col-md-6 select-container">
+                <h4 class="col-12">Topic Week </h4>
+                <select id="week-name-id" class="genius-hour-data">
+            <option value="hide">-- Week --</option>
+          
+        </select>
+
+            </div>
+            <div id="topic-type-container" class="col-12 col-sm-6  select-container">
+                <h4 class="col-12">Topic Type</h4>
+                <select id="topic-type-id" class="genius-hour-data" class="required">
+            <option value="hide">-- Type --</option>
+           
+            
+           
+        </select>
+
+            </div>
+        </div>
+
+        <div class="quantity row">
+            <h4 class="col-12">Hours Earned:</h4>
+            <div class="col-12">
+                <input id="topic-requested-hrs" class="genius-hour-data" type="number" min="1" max="9" step="1" value="1">
+            </div>
+            <div class="col-12">
+                <h4>Topic Title:</h4>
+                <input type="text" id="topic-title" class="genius-hour-data">
+            </div>
+            <div class="col-12 mt-3">
+                <h4>Links:</h4>
+
+                <textarea placeholder="This is an awesome comment box" rows="20" name="comment[text]" id="topic-links" cols="40" class="ui-autocomplete-input genius-hour-data" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
+            </div>
+            <div class="col-12 mt-3">
+                <h4>Feedback:</h4>
+
+                <textarea placeholder="This is an awesome comment box" rows="20" name="comment[text]" id="topic-notes" cols="40" class="ui-autocomplete-input genius-hour-data" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12 mt-1 text-right">
+
+                <input type="button" value="Submit" class="action" onclick="form_data()">
+                <input type="button" value="Close" onclick="google.script.host.close()" />
+            </div>
+        </div>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+    </script>
+    <script>
+        jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input#topic-requested-hrs');
+        jQuery('.quantity').each(function() {
+            var spinner = jQuery(this),
+                input = spinner.find('input[type="number"]#topic-requested-hrs '),
+                btnUp = spinner.find('.quantity-up'),
+                btnDown = spinner.find('.quantity-down'),
+                min = input.attr('min'),
+                max = input.attr('max');
+
+            btnUp.click(function() {
+                var oldValue = parseFloat(input.val());
+                if (oldValue >= max) {
+                    var newVal = oldValue;
+                } else {
+                    var newVal = oldValue + 1;
+                }
+                spinner.find("input#topic-requested-hrs").val(newVal);
+                spinner.find("input#topic-requested-hrs").trigger("change");
+            });
+
+            btnDown.click(function() {
+                var oldValue = parseFloat(input.val());
+                if (oldValue <= min) {
+                    var newVal = oldValue;
+                } else {
+                    var newVal = oldValue - 1;
+                }
+                spinner.find("#topic-requested-hrs input").val(newVal);
+                spinner.find("#topic-requested-hrs input").trigger("change");
+            });
+
+        });
+    </script>
+
+    <script>
+        /*SELECT DROPDOWN JAVASCRIPT*/
+        /*
+Reference: http://jsfiddle.net/BB3JK/47/
+*/
+        function updateSelects() {
+            $('select').each(function() {
+                var $this = $(this),
+                    numberOfOptions = $(this).children('option').length;
+
+                $this.addClass('select-hidden');
+                $this.wrap('<div class="select"></div>');
+                $this.after('<div class="select-styled"></div>');
+
+                var $styledSelect = $this.next('div.select-styled');
+                $styledSelect.text($this.children('option').eq(0).text());
+
+                var $list = $('<ul />', {
+                    'class': 'select-options'
+                }).insertAfter($styledSelect);
+
+                for (var i = 0; i < numberOfOptions; i++) {
+                    $('<li />', {
+                        text: $this.children('option').eq(i).text(),
+                        rel: $this.children('option').eq(i).val()
+                    }).appendTo($list);
+                }
+
+                var $listItems = $list.children('li');
+
+                $styledSelect.click(function(e) {
+                    e.stopPropagation();
+                    $('div.select-styled.active').not(this).each(function() {
+                        $(this).removeClass('active').next('ul.select-options').hide();
+                    });
+                    $(this).toggleClass('active').next('ul.select-options').toggle();
+                });
+
+                $listItems.click(function(e) {
+                    e.stopPropagation();
+                    $styledSelect.text($(this).text()).removeClass('active');
+                    $this.val($(this).attr('rel'));
+                    $list.hide();
+                    //console.log($this.val());
+                });
+
+                $(document).click(function() {
+                    $styledSelect.removeClass('active');
+                    $list.hide();
+                });
+
+            });
+        }
+    </script>
+    <script>
+        function Validate() {
+            var topic = document.getElementById("topic-type-id");
+            var week = document.getElementById("week-name-id");
+
+
+
+            if (week.value == "hide") {
+                //If the "Please Select" option is selected display error.
+                alert("Please select a Week!");
+                return false;
+            }
+
+            if (topic.value == "hide") {
+                //If the "Please Select" option is selected display error.
+                alert("Please select a Topic!");
+                return false;
+            }
+            return true;
+        }
+
+        function form_data() {
+
+            if (Validate()) {
+                var finArr, valArr, keyArr = [];
+
+                //Default Values == ["hide", "hide", "1", "", "", ""]
+                var valueArray = $('.genius-hour-data').map(function() {
+                    return this.value;
+
+
+                }).get();
+                var keyArray = $('.genius-hour-data').map(function() {
+                    return this.id;
+
+                }).get();
+
+                keyArray.push("date-submitted");
+                valueArray.push(new Date().toLocaleString());
+
+                if (valueArray[0] == "hide") {
+                    valueArray[0] = new Date().toLocaleString()
+                }
+                if (valueArray[1] == "hide") {
+                    valueArray[0] = new Date().toLocaleString()
+                }
+                finArr = [keyArray, valueArray];
+                console.log(finArr)
+                var stringifyFinArr = JSON.stringify(finArr)
+
+
+                google.script.run.withSuccessHandler(closeIt).addGeniusHours(stringifyFinArr);
+
+
+            }
+        }
+
+
+        $(function() {
+
+            var jsonObj = JSON.parse(<?=data?>);
+            var weekSelect = $('#week-name-id');
+            var typeSelect = $('#topic-type-id');
+            var weekArrId = jsonObj["week-name-id"];
+            var typeArrId = jsonObj["topic-type-id"];
+            var weekArr = jsonObj["week-name"];
+            var typeArr = jsonObj["topic-type"];
+            var value, innerHTML = "";
+            var splitArr, splitTitleArr = [];
+
+            for (var i = 0; i < weekArr.length; i++) {
+                value = weekArrId[i];
+                innerHTML = weekArr[i]
+
+                console.log("value " + i + ": " + value);
+
+                weekSelect.append($('<option ></option>').val(value).html(innerHTML));
+            }
+            value, innerHTML = "";
+
+            for (var i = 0; i < typeArr.length; i++) {
+
+                value = typeArrId[i];
+                innerHTML = typeArr[i];
+                console.log("value " + i + ": " + value);
+
+                typeSelect.append($('<option ></option>').val(value).html(innerHTML));
+                console.log(typeSelect);
+            }
+
+            updateSelects();
+
+        });
+
+
+        function closeIt() {
+            google.script.host.close()
+        }
+    </script>
+</body>
+
+</html>

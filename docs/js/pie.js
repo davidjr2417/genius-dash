@@ -8,13 +8,7 @@ var demos = [
         title: "",
         background: "#E5E5E5",
         dataset: {
-            "Concept 1": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
-            "Concept 2": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
-            "Concept 3": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
-            "Concept 4": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
-            "Concept 5": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." },
-            "Concept 6": { percentage: 16.66, color: "#FF0000", story: "I don't really like boats because they can cause sea-sickness. However they are useful for transporting goods and fishing." }
-        },
+             },
         font: "Copperplate",
         fullscreen: true,
         circleRadius: 120,
@@ -340,6 +334,7 @@ function BBMouseOver(event) {
         new createjs.ColorFilter(1, 1, 1, 1, event.target.color == "#000" ? 100 : -100, event.target.color == "#000" ? 100 : -100, event.target.color == "#000" ? 100 : -100, 0)
     ];
     event.target.cache(-45, -45, 90, 90);
+    
 }
 
 function BBMouseOut(event) {
@@ -347,6 +342,7 @@ function BBMouseOut(event) {
         new createjs.ColorFilter(1, 1, 1, 1, 0, 0, 0, 0)
     ];
     event.target.cache(-45, -45, 90, 90);
+  
 }
 
 function BBMouseClick(event) {
